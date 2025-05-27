@@ -1,10 +1,9 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Play, Clock, Mic } from "lucide-react";
+import { Clock, Mic } from "lucide-react";
 
 const Podcast = () => {
   const episodes = [
@@ -106,11 +105,6 @@ const Podcast = () => {
                     alt={episode.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <Button size="lg" className="bg-white bg-opacity-90 text-primary-600 hover:bg-white rounded-full w-16 h-16 p-0">
-                      <Play className="h-6 w-6 ml-1" />
-                    </Button>
-                  </div>
                   <div className="absolute top-4 right-4">
                     <Badge className="bg-black bg-opacity-70 text-white">
                       <Clock className="h-3 w-3 mr-1" />
@@ -129,10 +123,9 @@ const Podcast = () => {
                   <CardDescription className="text-gray-600">{episode.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button className="w-full bg-primary-600 hover:bg-primary-700">
-                    <Play className="h-4 w-4 mr-2" />
-                    Play Episode
-                  </Button>
+                  <div className="w-full py-3 px-4 bg-gray-100 rounded-md text-center text-gray-600 font-medium">
+                    Coming Soon
+                  </div>
                 </CardContent>
               </Card>
             ))}
