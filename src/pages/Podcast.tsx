@@ -1,11 +1,15 @@
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Mic } from "lucide-react";
+import { useState } from "react";
 
 const Podcast = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   const episodes = [
     {
       title: "The Future of AI in Education",
@@ -13,7 +17,7 @@ const Podcast = () => {
       duration: "45 min",
       category: "Educational",
       date: "Dec 15, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400",
+      thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400",
     },
     {
       title: "From Student to Tech Leader",
@@ -21,7 +25,7 @@ const Podcast = () => {
       duration: "38 min",
       category: "Student Stories",
       date: "Dec 10, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400",
+      thumbnail: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400",
     },
     {
       title: "Overcoming Coding Challenges",
@@ -29,7 +33,7 @@ const Podcast = () => {
       duration: "32 min",
       category: "Motivational",
       date: "Dec 5, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400",
+      thumbnail: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400",
     },
     {
       title: "Industry Expert: Data Science Trends",
@@ -37,7 +41,7 @@ const Podcast = () => {
       duration: "52 min",
       category: "Guest Interview",
       date: "Nov 30, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400",
+      thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
     },
     {
       title: "Building Your First Startup",
@@ -45,7 +49,7 @@ const Podcast = () => {
       duration: "41 min",
       category: "Educational",
       date: "Nov 25, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400",
+      thumbnail: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400",
     },
     {
       title: "Cybersecurity Career Paths",
@@ -53,11 +57,15 @@ const Podcast = () => {
       duration: "36 min",
       category: "Educational",
       date: "Nov 20, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400",
+      thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400",
     },
   ];
 
   const categories = ["All", "Educational", "Motivational", "Guest Interview", "Student Stories"];
+
+  const filteredEpisodes = selectedCategory === "All" 
+    ? episodes 
+    : episodes.filter(episode => episode.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-white">
@@ -83,8 +91,9 @@ const Podcast = () => {
             {categories.map((category, index) => (
               <Button
                 key={index}
-                variant={index === 0 ? "default" : "outline"}
-                className={index === 0 ? "bg-primary-600 hover:bg-primary-700" : ""}
+                variant={selectedCategory === category ? "default" : "outline"}
+                className={selectedCategory === category ? "bg-primary-600 hover:bg-primary-700" : ""}
+                onClick={() => setSelectedCategory(category)}
               >
                 {category}
               </Button>
@@ -97,7 +106,7 @@ const Podcast = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {episodes.map((episode, index) => (
+            {filteredEpisodes.map((episode, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="relative aspect-video bg-gradient-to-br from-primary-100 to-primary-200 rounded-t-lg overflow-hidden">
                   <img 

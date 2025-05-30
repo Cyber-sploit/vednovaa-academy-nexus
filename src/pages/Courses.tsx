@@ -10,49 +10,49 @@ const Courses = () => {
     {
       title: "AI/ML with Python",
       description: "Master artificial intelligence and machine learning with hands-on Python programming",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600",
       slug: "ai-ml-python"
     },
     {
       title: "Python Programming", 
       description: "Learn Python from basics to advanced concepts with real-world projects",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600",
+      image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600",
       slug: "python-programming"
     },
     {
       title: "Data Analysis",
       description: "Transform raw data into actionable insights using modern analytical tools",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
       slug: "data-analysis"
     },
     {
       title: "Cyber Security",
       description: "Protect digital assets and learn ethical hacking techniques", 
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600",
       slug: "cyber-security"
     },
     {
       title: "Business Analysis",
       description: "Bridge the gap between business needs and technical solutions",
-      image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600",
+      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600",
       slug: "business-analysis"
     },
     {
       title: "Build360",
       description: "Comprehensive full-stack development program",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=600",
+      image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600",
       slug: "build360"
     },
     {
       title: "Finance",
       description: "Financial modeling, analysis, and investment strategies",
-      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600",
       slug: "finance"
     },
     {
       title: "Bioinformatics",
       description: "Apply computational techniques to biological data analysis",
-      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600",
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600",
       slug: "bioinformatics"
     },
   ];
@@ -89,6 +89,7 @@ const Courses = () => {
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold text-gray-900">{course.title}</CardTitle>
                   <CardDescription className="text-gray-600">{course.description}</CardDescription>
+                  <p className="text-primary-600 font-medium text-sm">0 Enrolled</p>
                 </CardHeader>
                 <CardContent>
                   <Link to={`/course/${course.slug}`}>

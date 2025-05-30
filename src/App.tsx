@@ -17,6 +17,7 @@ import BlogDetail from "./pages/BlogDetail";
 import Contact from "./pages/Contact";
 import SampleCertificate from "./pages/SampleCertificate";
 import ReferNow from "./pages/ReferNow";
+import Enrollment from "./pages/Enrollment";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App: React.FC = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/sample-certificate" element={<SampleCertificate />} />
             <Route path="/refer-now" element={<ReferNow />} />
+            <Route path="/enrollment" element={<Enrollment />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
