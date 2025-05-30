@@ -4,7 +4,7 @@ import CourseCard from "@/components/CourseCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, Award, Clock } from "lucide-react";
+import { BookOpen, Users, Award, Clock, GraduationCap, Target, Lightbulb } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 
 const Index = () => {
@@ -12,7 +12,7 @@ const Index = () => {
 
   const colleges = [
     "Government Engineering College",
-    "State University of Technology",
+    "State University of Technology", 
     "Regional Institute of Management",
     "National College of Engineering",
     "Central Technical University",
@@ -26,21 +26,21 @@ const Index = () => {
       title: "AI/ML with Python",
       description: "Master artificial intelligence and machine learning",
       enrollments: "0 Enrolled",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
       slug: "ai-ml-python"
     },
     {
       title: "Data Analysis", 
       description: "Transform data into actionable insights",
       enrollments: "0 Enrolled",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
       slug: "data-analysis"
     },
     {
       title: "Cyber Security",
       description: "Protect digital assets and networks", 
       enrollments: "0 Enrolled",
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600",
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop",
       slug: "cyber-security"
     },
   ];
@@ -71,6 +71,29 @@ const Index = () => {
       description: "Crash Course Program",
       icon: <Users className="h-6 w-6" />,
     },
+  ];
+
+  const educationStats = [
+    {
+      icon: <GraduationCap className="h-8 w-8" />,
+      number: "500+",
+      label: "Students Trained"
+    },
+    {
+      icon: <Target className="h-8 w-8" />,
+      number: "95%",
+      label: "Success Rate"
+    },
+    {
+      icon: <Lightbulb className="h-8 w-8" />,
+      number: "50+",
+      label: "Industry Projects"
+    },
+    {
+      icon: <Award className="h-8 w-8" />,
+      number: "8+",
+      label: "Course Programs"
+    }
   ];
 
   const handleEnquireNow = () => {
@@ -129,11 +152,28 @@ const Index = () => {
             
             <div className="animate-fade-in-scale" style={{ animationDelay: '0.3s' }}>
               <img 
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800" 
-                alt="Students learning together"
+                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=600&fit=crop" 
+                alt="Students in modern classroom with technology"
                 className="rounded-lg shadow-2xl w-full h-80 object-cover"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Education Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {educationStats.map((stat, index) => (
+              <div key={index} className="text-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full text-primary-600 mb-4">
+                  {stat.icon}
+                </div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
+                <div className="text-gray-600">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -169,7 +209,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {popularCourses.map((course, index) => (
               <div key={index} className="animate-fade-in-scale" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full">
                   <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
                     <img 
                       src={course.image} 
@@ -205,7 +245,7 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {timelineSteps.map((step, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-all duration-500 animate-slide-up hover:transform hover:-translate-y-2" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card key={index} className="text-center hover:shadow-lg transition-all duration-500 animate-slide-up hover:transform hover:-translate-y-2 h-full" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary-600 animate-pulse-gentle">
                     {step.icon}

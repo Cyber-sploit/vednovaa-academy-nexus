@@ -20,7 +20,7 @@ const CourseDetail = () => {
       description: "Master artificial intelligence and machine learning with hands-on Python programming. This comprehensive course covers everything from basic machine learning concepts to advanced deep learning techniques.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
       curriculum: [
         "Introduction to Python Programming and AI Fundamentals",
         "Data Structures and Mathematical Foundations",
@@ -43,7 +43,7 @@ const CourseDetail = () => {
       description: "Learn Python from basics to advanced concepts with real-world projects. Perfect for beginners and those looking to strengthen their programming foundation.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600",
+      image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&h=600&fit=crop",
       curriculum: [
         "Python Basics: Syntax, Variables, and Data Types",
         "Control Structures: Loops, Conditionals, and Logic",
@@ -66,7 +66,7 @@ const CourseDetail = () => {
       description: "Transform raw data into actionable insights using modern analytical tools and techniques. Learn to work with real-world datasets and create meaningful visualizations.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
       curriculum: [
         "Introduction to Data Analysis and Statistical Thinking",
         "Excel for Data Analysis: Advanced Functions and Formulas",
@@ -89,7 +89,7 @@ const CourseDetail = () => {
       description: "Protect digital assets and learn ethical hacking techniques. Comprehensive coverage of cybersecurity principles, tools, and best practices.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600",
+      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop",
       curriculum: [
         "Cybersecurity Fundamentals and Threat Landscape",
         "Network Security Architecture and Protocols",
@@ -112,7 +112,7 @@ const CourseDetail = () => {
       description: "Bridge the gap between business needs and technical solutions. Learn to analyze requirements, create documentation, and drive successful project outcomes.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600",
+      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop",
       curriculum: [
         "Business Analysis Fundamentals and Role Definition",
         "Requirements Gathering Techniques and Best Practices",
@@ -135,7 +135,7 @@ const CourseDetail = () => {
       description: "Comprehensive full-stack development program covering frontend, backend, databases, and deployment. Build complete web applications from scratch.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
       curriculum: [
         "HTML5 Fundamentals and Semantic Web Structure",
         "CSS3 Advanced Styling and Responsive Design",
@@ -158,7 +158,7 @@ const CourseDetail = () => {
       description: "Financial modeling, analysis, and investment strategies. Learn essential finance concepts and tools used in modern financial markets.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop",
       curriculum: [
         "Financial Markets Overview and Investment Fundamentals",
         "Financial Statement Analysis and Interpretation",
@@ -181,7 +181,7 @@ const CourseDetail = () => {
       description: "Apply computational techniques to biological data analysis. Explore the intersection of biology, computer science, and data analysis.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600",
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop",
       curriculum: [
         "Introduction to Bioinformatics and Computational Biology",
         "Biological Databases and Data Resources",
@@ -265,7 +265,7 @@ const CourseDetail = () => {
               <img 
                 src={course.image} 
                 alt={course.title}
-                className="rounded-lg shadow-2xl w-full h-64 object-cover"
+                className="rounded-lg shadow-2xl w-full h-80 object-cover"
               />
             </div>
           </div>
