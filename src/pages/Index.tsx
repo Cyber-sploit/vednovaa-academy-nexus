@@ -1,10 +1,11 @@
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CourseCard from "@/components/CourseCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, Award, Clock, GraduationCap, Target, Lightbulb } from "lucide-react";
+import { BookOpen, Users, Award, Clock, GraduationCap, Target, Lightbulb, Brain, Code, Shield, BarChart3, TrendingUp, Star } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 
 const Index = () => {
@@ -73,29 +74,6 @@ const Index = () => {
     },
   ];
 
-  const educationStats = [
-    {
-      icon: <GraduationCap className="h-8 w-8" />,
-      number: "500+",
-      label: "Students Trained"
-    },
-    {
-      icon: <Target className="h-8 w-8" />,
-      number: "95%",
-      label: "Success Rate"
-    },
-    {
-      icon: <Lightbulb className="h-8 w-8" />,
-      number: "50+",
-      label: "Industry Projects"
-    },
-    {
-      icon: <Award className="h-8 w-8" />,
-      number: "8+",
-      label: "Course Programs"
-    }
-  ];
-
   const handleEnquireNow = () => {
     navigate('/contact');
   };
@@ -150,30 +128,56 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="animate-fade-in-scale" style={{ animationDelay: '0.3s' }}>
-              <img 
-                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=600&fit=crop" 
-                alt="Students in modern classroom with technology"
-                className="rounded-lg shadow-2xl w-full h-80 object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Education Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {educationStats.map((stat, index) => (
-              <div key={index} className="text-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 rounded-full text-primary-600 mb-4">
-                  {stat.icon}
+            {/* Educational Elements instead of image */}
+            <div className="animate-fade-in-scale relative" style={{ animationDelay: '0.3s' }}>
+              <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                {/* Floating Education Icons */}
+                <div className="grid grid-cols-3 gap-6 mb-8">
+                  <div className="bg-white/20 rounded-xl p-4 text-center transform hover:scale-110 transition-all duration-300">
+                    <Brain className="h-8 w-8 mx-auto mb-2 text-primary-200" />
+                    <p className="text-sm font-medium">AI/ML</p>
+                  </div>
+                  <div className="bg-white/20 rounded-xl p-4 text-center transform hover:scale-110 transition-all duration-300">
+                    <Code className="h-8 w-8 mx-auto mb-2 text-primary-200" />
+                    <p className="text-sm font-medium">Programming</p>
+                  </div>
+                  <div className="bg-white/20 rounded-xl p-4 text-center transform hover:scale-110 transition-all duration-300">
+                    <Shield className="h-8 w-8 mx-auto mb-2 text-primary-200" />
+                    <p className="text-sm font-medium">Security</p>
+                  </div>
                 </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                <div className="text-gray-600">{stat.label}</div>
+                
+                {/* Learning Path Visualization */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
+                    <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-bold text-primary-800">1</span>
+                    </div>
+                    <span className="text-primary-100">Learn Fundamentals</span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
+                    <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-bold text-primary-800">2</span>
+                    </div>
+                    <span className="text-primary-100">Practice Projects</span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
+                    <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
+                      <span className="text-sm font-bold text-primary-800">3</span>
+                    </div>
+                    <span className="text-primary-100">Get Certified</span>
+                  </div>
+                </div>
+                
+                {/* Achievement Badge */}
+                <div className="mt-6 text-center">
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-orange-900 px-4 py-2 rounded-full font-semibold">
+                    <Star className="h-4 w-4" />
+                    Industry Ready Skills
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
