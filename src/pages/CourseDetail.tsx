@@ -4,21 +4,40 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Star, Clock, BookOpen, ChevronDown, Brain, Code, BarChart3, Shield, Briefcase, Laptop, DollarSign, Dna } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Star, Clock, BookOpen, Brain, Code, BarChart3, Shield, Briefcase, Laptop, DollarSign, Dna, Users, Target, Lightbulb } from "lucide-react";
 import { useState } from "react";
 
 const CourseDetail = () => {
   const { courseSlug } = useParams();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+
+  const personalityDevelopmentCurriculum = [
+    "Effective Communication (Verbal and Written)",
+    "Positive Body Language and Posture",
+    "Time Management Strategies",
+    "Team Collaboration and Interpersonal Skills",
+    "Conflict Resolution Basics",
+    "Developing a Professional Mindset",
+    "Goal Setting and Self-Discipline"
+  ];
+
+  const labContent = [
+    "Hands-on Practice Tools and Software",
+    "Real-world Assignments and Exercises",
+    "Simulated Lab Environments",
+    "Industry-Standard Development Tools",
+    "Project-based Learning Activities",
+    "Practical Implementation Workshops",
+    "Live Coding Sessions and Debugging"
+  ];
 
   const courseData = {
     "ai-ml-python": {
       title: "AI/ML with Python",
       description: "Master artificial intelligence and machine learning with hands-on Python programming. This comprehensive course covers everything from basic machine learning concepts to advanced deep learning techniques.",
       rating: 0,
-      duration: "25 Hours",
+      duration: "30 Hours (25 + 5 Hours)",
       icon: Brain,
       iconColor: "text-purple-600",
       bgColor: "bg-purple-100",
@@ -43,7 +62,7 @@ const CourseDetail = () => {
       title: "Python Programming",
       description: "Learn Python from basics to advanced concepts with real-world projects. Perfect for beginners and those looking to strengthen their programming foundation.",
       rating: 0,
-      duration: "25 Hours",
+      duration: "30 Hours (25 + 5 Hours)",
       icon: Code,
       iconColor: "text-green-600",
       bgColor: "bg-green-100",
@@ -68,7 +87,7 @@ const CourseDetail = () => {
       title: "Data Analysis",
       description: "Transform raw data into actionable insights using modern analytical tools and techniques. Learn to work with real-world datasets and create meaningful visualizations.",
       rating: 0,
-      duration: "25 Hours",
+      duration: "30 Hours (25 + 5 Hours)",
       icon: BarChart3,
       iconColor: "text-blue-600",
       bgColor: "bg-blue-100",
@@ -93,7 +112,7 @@ const CourseDetail = () => {
       title: "Cyber Security",
       description: "Protect digital assets and learn ethical hacking techniques. Comprehensive coverage of cybersecurity principles, tools, and best practices.",
       rating: 0,
-      duration: "25 Hours",
+      duration: "30 Hours (25 + 5 Hours)",
       icon: Shield,
       iconColor: "text-red-600",
       bgColor: "bg-red-100",
@@ -118,7 +137,7 @@ const CourseDetail = () => {
       title: "Business Analysis",
       description: "Bridge the gap between business needs and technical solutions. Learn to analyze requirements, create documentation, and drive successful project outcomes.",
       rating: 0,
-      duration: "25 Hours",
+      duration: "30 Hours (25 + 5 Hours)",
       icon: Briefcase,
       iconColor: "text-orange-600",
       bgColor: "bg-orange-100",
@@ -143,7 +162,7 @@ const CourseDetail = () => {
       title: "Build360",
       description: "Comprehensive full-stack development program covering frontend, backend, databases, and deployment. Build complete web applications from scratch.",
       rating: 0,
-      duration: "25 Hours",
+      duration: "30 Hours (25 + 5 Hours)",
       icon: Laptop,
       iconColor: "text-indigo-600",
       bgColor: "bg-indigo-100",
@@ -168,7 +187,7 @@ const CourseDetail = () => {
       title: "Finance",
       description: "Financial modeling, analysis, and investment strategies. Learn essential finance concepts and tools used in modern financial markets.",
       rating: 0,
-      duration: "25 Hours",
+      duration: "30 Hours (25 + 5 Hours)",
       icon: DollarSign,
       iconColor: "text-emerald-600",
       bgColor: "bg-emerald-100",
@@ -193,7 +212,7 @@ const CourseDetail = () => {
       title: "Bioinformatics",
       description: "Apply computational techniques to biological data analysis. Explore the intersection of biology, computer science, and data analysis.",
       rating: 0,
-      duration: "25 Hours",
+      duration: "30 Hours (25 + 5 Hours)",
       icon: Dna,
       iconColor: "text-pink-600",
       bgColor: "bg-pink-100",
@@ -287,7 +306,9 @@ const CourseDetail = () => {
 
       {/* Course Details */}
       <section className="py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          {/* Curriculum Section */}
           <Card className="animate-fade-in">
             <CardHeader>
               <CardTitle className="flex items-center space-x-2">
@@ -299,14 +320,13 @@ const CourseDetail = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-                <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between">
-                    <span>View Full Curriculum ({course.curriculum.length} Topics)</span>
-                    <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="mt-4">
+              <Tabs defaultValue="course" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="course">25 Hours – Course</TabsTrigger>
+                  <TabsTrigger value="personality">5 Hours – Personality Development</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="course" className="mt-6">
                   <div className="grid grid-cols-1 gap-4">
                     {course.curriculum.map((topic, index) => (
                       <div key={index} className="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg">
@@ -315,8 +335,116 @@ const CourseDetail = () => {
                       </div>
                     ))}
                   </div>
-                </CollapsibleContent>
-              </Collapsible>
+                </TabsContent>
+                
+                <TabsContent value="personality" className="mt-6">
+                  <div className="grid grid-cols-1 gap-4">
+                    {personalityDevelopmentCurriculum.map((topic, index) => (
+                      <div key={index} className="flex items-start space-x-3 p-4 bg-purple-50 rounded-lg">
+                        <Badge variant="outline" className="text-xs mt-1 border-purple-300">{index + 1}</Badge>
+                        <span className="text-sm flex-1">{topic}</span>
+                        <Users className="h-4 w-4 text-purple-600" />
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
+
+          {/* Pricing Section */}
+          <Card className="animate-fade-in">
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <DollarSign className="h-6 w-6 text-primary-600" />
+                <span>Course Pricing</span>
+              </CardTitle>
+              <CardDescription>
+                Choose the package that best fits your learning goals
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Tabs defaultValue="without-lab" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="without-lab">₹3000 – Without Lab</TabsTrigger>
+                  <TabsTrigger value="with-lab">₹5000 – With Lab</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="without-lab" className="mt-6">
+                  <div className="space-y-6">
+                    <div className="text-center p-6 bg-gradient-to-r from-primary-50 to-primary-100 rounded-lg">
+                      <h3 className="text-2xl font-bold text-primary-700 mb-2">₹3000</h3>
+                      <p className="text-primary-600">Complete 30-Hour Course Package</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-gray-900 flex items-center">
+                          <Target className="h-5 w-5 mr-2 text-primary-600" />
+                          25 Hours - Core Course
+                        </h4>
+                        <p className="text-sm text-gray-600">Complete technical curriculum with all modules and case studies</p>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-gray-900 flex items-center">
+                          <Lightbulb className="h-5 w-5 mr-2 text-purple-600" />
+                          5 Hours - Personality Development
+                        </h4>
+                        <p className="text-sm text-gray-600">Soft skills training including communication, leadership, and professional development</p>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+                
+                <TabsContent value="with-lab" className="mt-6">
+                  <div className="space-y-6">
+                    <div className="text-center p-6 bg-gradient-to-r from-green-50 to-green-100 rounded-lg">
+                      <h3 className="text-2xl font-bold text-green-700 mb-2">₹5000</h3>
+                      <p className="text-green-600">Complete Course + Hands-on Lab Experience</p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-gray-900 flex items-center">
+                          <Target className="h-5 w-5 mr-2 text-primary-600" />
+                          25 Hours - Core Course
+                        </h4>
+                        <p className="text-sm text-gray-600">Complete technical curriculum</p>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-gray-900 flex items-center">
+                          <Lightbulb className="h-5 w-5 mr-2 text-purple-600" />
+                          5 Hours - Personality Development
+                        </h4>
+                        <p className="text-sm text-gray-600">Professional soft skills training</p>
+                      </div>
+                      
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-gray-900 flex items-center">
+                          <Code className="h-5 w-5 mr-2 text-green-600" />
+                          Hands-on Lab Access
+                        </h4>
+                        <p className="text-sm text-gray-600">Practical implementation and tools</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-6">
+                      <h4 className="font-semibold text-gray-900 mb-4">Lab Features Include:</h4>
+                      <div className="grid grid-cols-1 gap-3">
+                        {labContent.map((item, index) => (
+                          <div key={index} className="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+                            <Badge variant="outline" className="text-xs mt-1 border-green-300">{index + 1}</Badge>
+                            <span className="text-sm flex-1">{item}</span>
+                            <Code className="h-4 w-4 text-green-600" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+              </Tabs>
             </CardContent>
           </Card>
         </div>
