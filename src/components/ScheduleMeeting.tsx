@@ -54,7 +54,7 @@ const ScheduleMeeting = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('meeting_schedules')
         .insert([{
           name: meetingData.name,
