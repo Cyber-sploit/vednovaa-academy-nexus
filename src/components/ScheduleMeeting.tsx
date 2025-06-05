@@ -8,11 +8,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Calendar, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 const ScheduleMeeting = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [selectedTime, setSelectedTime] = useState("");
   const [meetingData, setMeetingData] = useState({
     name: "",
@@ -20,17 +24,6 @@ const ScheduleMeeting = () => {
     phone: "",
     purpose: ""
   });
-
-  const availableDates = [
-    "2024-12-20",
-    "2024-12-21", 
-    "2024-12-23",
-    "2024-12-24",
-    "2024-12-26",
-    "2024-12-27",
-    "2024-12-30",
-    "2024-12-31"
-  ];
 
   const timeSlots = [
     "10:00 AM",
@@ -61,7 +54,7 @@ const ScheduleMeeting = () => {
           email: meetingData.email,
           phone: meetingData.phone,
           purpose: meetingData.purpose,
-          selected_date: selectedDate,
+          selected_date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
           selected_time: selectedTime
         }]);
 
@@ -74,7 +67,7 @@ const ScheduleMeeting = () => {
       
       // Reset form
       setMeetingData({ name: "", email: "", phone: "", purpose: "" });
-      setSelectedDate("");
+      setSelectedDate(undefined);
       setSelectedTime("");
     } catch (error) {
       console.error('Error scheduling meeting:', error);
@@ -155,23 +148,30 @@ const ScheduleMeeting = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="date">Preferred Date *</Label>
-              <Select value={selectedDate} onValueChange={setSelectedDate}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select date" />
-                </SelectTrigger>
-                <SelectContent>
-                  {availableDates.map((date) => (
-                    <SelectItem key={date} value={date}>
-                      {new Date(date).toLocaleDateString('en-US', { 
-                        weekday: 'long', 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
-                      })}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !selectedDate && "text-muted-foreground"
+                    )}
+                  >
+                    <Calendar className="mr-2 h-4 w-4" />
+                    {selectedDate ? format(selectedDate, "PPP") : <span>Pick a date</span>}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <CalendarComponent
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
+                    disabled={(date) => date < new Date()}
+                    initialFocus
+                    className="p-3 pointer-events-auto"
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
             <div className="space-y-2">
               <Label htmlFor="time">Preferred Time *</Label>
