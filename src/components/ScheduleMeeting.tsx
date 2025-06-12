@@ -7,10 +7,16 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 const ScheduleMeeting = () => {
   const { toast } = useToast();
-  const [selectedDate, setSelectedDate] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [selectedTime, setSelectedTime] = useState("");
   const [meetingData, setMeetingData] = useState({
     name: "",
@@ -18,17 +24,6 @@ const ScheduleMeeting = () => {
     phone: "",
     purpose: ""
   });
-
-  const availableDates = [
-    "2024-12-20",
-    "2024-12-21", 
-    "2024-12-23",
-    "2024-12-24",
-    "2024-12-26",
-    "2024-12-27",
-    "2024-12-30",
-    "2024-12-31"
-  ];
 
   const timeSlots = [
     "10:00 AM",
@@ -47,18 +42,43 @@ const ScheduleMeeting = () => {
     "General Consultation"
   ];
 
-  const handleSchedule = (e: React.FormEvent) => {
+  const handleSchedule = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Meeting scheduled:", { ...meetingData, selectedDate, selectedTime });
-    toast({
-      title: "Meeting Scheduled!",
-      description: "We'll send you a confirmation email with the meeting details.",
-    });
-    
-    // Reset form
-    setMeetingData({ name: "", email: "", phone: "", purpose: "" });
-    setSelectedDate("");
-    setSelectedTime("");
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('meeting_schedules')
+        .insert([{
+          name: meetingData.name,
+          email: meetingData.email,
+          phone: meetingData.phone,
+          purpose: meetingData.purpose,
+          selected_date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
+          selected_time: selectedTime
+        }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Meeting Scheduled!",
+        description: "We'll send you a confirmation email with the meeting details.",
+      });
+      
+      // Reset form
+      setMeetingData({ name: "", email: "", phone: "", purpose: "" });
+      setSelectedDate(undefined);
+      setSelectedTime("");
+    } catch (error) {
+      console.error('Error scheduling meeting:', error);
+      toast({
+        title: "Error",
+        description: "There was an error scheduling your meeting. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -128,23 +148,30 @@ const ScheduleMeeting = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="date">Preferred Date *</Label>
-              <Select value={selectedDate} onValueChange={setSelectedDate}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select date" />
-                </SelectTrigger>
-                <SelectContent>
-                  {availableDates.map((date) => (
-                    <SelectItem key={date} value={date}>
-                      {new Date(date).toLocaleDateString('en-US', { 
-                        weekday: 'long', 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
-                      })}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !selectedDate && "text-muted-foreground"
+                    )}
+                  >
+                    <Calendar className="mr-2 h-4 w-4" />
+                    {selectedDate ? format(selectedDate, "PPP") : <span>Pick a date</span>}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <CalendarComponent
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
+                    disabled={(date) => date < new Date()}
+                    initialFocus
+                    className="p-3 pointer-events-auto"
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
             <div className="space-y-2">
               <Label htmlFor="time">Preferred Time *</Label>
@@ -169,9 +196,9 @@ const ScheduleMeeting = () => {
           <Button 
             type="submit" 
             className="w-full bg-primary-600 hover:bg-primary-700"
-            disabled={!selectedDate || !selectedTime || !meetingData.name || !meetingData.email}
+            disabled={!selectedDate || !selectedTime || !meetingData.name || !meetingData.email || isSubmitting}
           >
-            Schedule Meeting
+            {isSubmitting ? "Scheduling..." : "Schedule Meeting"}
           </Button>
         </form>
       </CardContent>
