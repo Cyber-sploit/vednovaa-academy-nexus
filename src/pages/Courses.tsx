@@ -113,7 +113,7 @@ const Courses = () => {
                   <p className="text-primary-600 font-medium text-sm">{course.enrollments}</p>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <Link to={`/course/${course.slug}`}>
+                  <Link to={`/course/${course.slug}`} target="_blank" rel="noopener noreferrer">
                     <Button className="w-full bg-primary-600 hover:bg-primary-700">
                       Learn More
                     </Button>
