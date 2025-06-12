@@ -25,7 +25,7 @@ const Index = () => {
     {
       title: "AI/ML with Python",
       description: "Master artificial intelligence and machine learning",
-      enrollments: "0 Enrolled",
+      enrollments: "40 Enrolled",
       icon: Brain,
       iconColor: "text-purple-600",
       bgColor: "bg-purple-100",
@@ -34,7 +34,7 @@ const Index = () => {
     {
       title: "Data Analysis", 
       description: "Transform data into actionable insights",
-      enrollments: "0 Enrolled",
+      enrollments: "55 Enrolled",
       icon: BarChart3,
       iconColor: "text-blue-600",
       bgColor: "bg-blue-100",
@@ -43,7 +43,7 @@ const Index = () => {
     {
       title: "Cyber Security",
       description: "Protect digital assets and networks", 
-      enrollments: "0 Enrolled",
+      enrollments: "30 Enrolled",
       icon: Shield,
       iconColor: "text-red-600",
       bgColor: "bg-red-100",
