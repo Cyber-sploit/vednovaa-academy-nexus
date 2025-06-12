@@ -16,22 +16,6 @@ const Footer = () => {
               Empowering students with cutting-edge education in technology, business, and innovation. 
               Join thousands of learners building their future with us.
             </p>
-            
-            {/* ISO Certifications */}
-            <div className="mt-6">
-              <h4 className="text-sm font-semibold text-gray-400 mb-3">ISO Certifications</h4>
-              <div className="flex space-x-4">
-                <div className="bg-white rounded-lg p-2 flex items-center justify-center">
-                  <span className="text-gray-900 text-xs font-bold">ISO 9001</span>
-                </div>
-                <div className="bg-white rounded-lg p-2 flex items-center justify-center">
-                  <span className="text-gray-900 text-xs font-bold">ISO 27001</span>
-                </div>
-                <div className="bg-white rounded-lg p-2 flex items-center justify-center">
-                  <span className="text-gray-900 text-xs font-bold">ISO 21001</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -71,7 +55,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2025 Vednovaa Academy. All rights reserved.
+            © 2024 Vednovaa Academy. All rights reserved.
           </p>
         </div>
       </div>

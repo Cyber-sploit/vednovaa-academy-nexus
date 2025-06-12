@@ -32,11 +32,9 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/3ff1ae8d-5072-4650-bc16-23977d26f4c5.png" 
-              alt="Vednovaa Academy" 
-              className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto"
-            />
+            <h1 className="text-2xl font-blanka font-bold text-primary-600">
+              Vednovaa Academy
+            </h1>
           </Link>
 
           {/* Desktop Navigation */}

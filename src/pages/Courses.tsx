@@ -14,8 +14,7 @@ const Courses = () => {
       icon: Brain,
       iconColor: "text-purple-600",
       bgColor: "bg-purple-100",
-      slug: "ai-ml-python",
-      enrollments: "40 Enrolled"
+      slug: "ai-ml-python"
     },
     {
       title: "Python Programming", 
@@ -23,8 +22,7 @@ const Courses = () => {
       icon: Code,
       iconColor: "text-green-600",
       bgColor: "bg-green-100",
-      slug: "python-programming",
-      enrollments: "0 Enrolled"
+      slug: "python-programming"
     },
     {
       title: "Data Analysis",
@@ -32,8 +30,7 @@ const Courses = () => {
       icon: BarChart3,
       iconColor: "text-blue-600",
       bgColor: "bg-blue-100",
-      slug: "data-analysis",
-      enrollments: "55 Enrolled"
+      slug: "data-analysis"
     },
     {
       title: "Cyber Security",
@@ -41,8 +38,7 @@ const Courses = () => {
       icon: Shield,
       iconColor: "text-red-600",
       bgColor: "bg-red-100",
-      slug: "cyber-security",
-      enrollments: "30 Enrolled"
+      slug: "cyber-security"
     },
     {
       title: "Business Analysis",
@@ -50,8 +46,7 @@ const Courses = () => {
       icon: Briefcase,
       iconColor: "text-orange-600",
       bgColor: "bg-orange-100",
-      slug: "business-analysis",
-      enrollments: "0 Enrolled"
+      slug: "business-analysis"
     },
     {
       title: "Build360",
@@ -59,8 +54,7 @@ const Courses = () => {
       icon: Laptop,
       iconColor: "text-indigo-600",
       bgColor: "bg-indigo-100",
-      slug: "build360",
-      enrollments: "0 Enrolled"
+      slug: "build360"
     },
     {
       title: "Finance",
@@ -68,8 +62,7 @@ const Courses = () => {
       icon: DollarSign,
       iconColor: "text-emerald-600",
       bgColor: "bg-emerald-100",
-      slug: "finance",
-      enrollments: "0 Enrolled"
+      slug: "finance"
     },
     {
       title: "Bioinformatics",
@@ -77,8 +70,7 @@ const Courses = () => {
       icon: Dna,
       iconColor: "text-pink-600",
       bgColor: "bg-pink-100",
-      slug: "bioinformatics",
-      enrollments: "0 Enrolled"
+      slug: "bioinformatics"
     },
   ];
 
@@ -110,7 +102,7 @@ const Courses = () => {
                 <CardHeader className="flex-grow">
                   <CardTitle className="text-lg font-semibold text-gray-900">{course.title}</CardTitle>
                   <CardDescription className="text-gray-600">{course.description}</CardDescription>
-                  <p className="text-primary-600 font-medium text-sm">{course.enrollments}</p>
+                  <p className="text-primary-600 font-medium text-sm">0 Enrolled</p>
                 </CardHeader>
                 <CardContent className="pt-0">
                   <Link to={`/course/${course.slug}`}>

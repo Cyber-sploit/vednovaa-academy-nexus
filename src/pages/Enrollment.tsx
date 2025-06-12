@@ -8,11 +8,9 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 
 const Enrollment = () => {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     gender: "",
@@ -27,6 +25,43 @@ const Enrollment = () => {
     timing: ""
   });
 
+  const indianColleges = [
+    "Indian Institute of Technology, Delhi",
+    "Indian Institute of Technology, Mumbai",
+    "Indian Institute of Technology, Bangalore",
+    "Indian Institute of Technology, Chennai",
+    "Indian Institute of Technology, Kanpur",
+    "Indian Institute of Science, Bangalore",
+    "Delhi University",
+    "Jawaharlal Nehru University",
+    "University of Mumbai",
+    "Anna University",
+    "Pune University",
+    "Calcutta University",
+    "Jamia Millia Islamia",
+    "Aligarh Muslim University",
+    "Banaras Hindu University",
+    "Other"
+  ];
+
+  const indianDegrees = [
+    "Bachelor of Technology (B.Tech)",
+    "Bachelor of Engineering (B.E.)",
+    "Bachelor of Computer Applications (BCA)",
+    "Bachelor of Science (B.Sc)",
+    "Master of Technology (M.Tech)",
+    "Master of Engineering (M.E.)",
+    "Master of Computer Applications (MCA)",
+    "Master of Science (M.Sc)",
+    "Bachelor of Business Administration (BBA)",
+    "Master of Business Administration (MBA)",
+    "Bachelor of Commerce (B.Com)",
+    "Master of Commerce (M.Com)",
+    "Bachelor of Arts (B.A.)",
+    "Master of Arts (M.A.)",
+    "Other"
+  ];
+
   const courses = [
     "AI/ML with Python",
     "Python Programming",
@@ -38,8 +73,8 @@ const Enrollment = () => {
     "Bioinformatics"
   ];
 
-  // Updated months array with disabled months removed
   const months = [
+    "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
 
@@ -48,58 +83,13 @@ const Enrollment = () => {
     "6:30 PM – 7:45 PM"
   ];
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { error } = await supabase
-        .from('enrollment_submissions')
-        .insert([{
-          name: formData.name,
-          gender: formData.gender,
-          email: formData.email,
-          phone: formData.phone,
-          college: formData.college,
-          degree: formData.degree,
-          year: formData.year,
-          course: formData.course,
-          batch_month: formData.batchMonth,
-          slot: formData.slot,
-          timing: formData.timing
-        }]);
-
-      if (error) throw error;
-
-      toast({
-        title: "Enrollment Submitted!",
-        description: "We'll contact you within 24 hours to confirm your enrollment.",
-      });
-
-      // Reset form
-      setFormData({
-        name: "",
-        gender: "",
-        email: "",
-        phone: "",
-        college: "",
-        degree: "",
-        year: "",
-        course: "",
-        batchMonth: "",
-        slot: "Evening",
-        timing: ""
-      });
-    } catch (error) {
-      console.error('Error submitting enrollment:', error);
-      toast({
-        title: "Error",
-        description: "There was an error submitting your enrollment. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    console.log("Enrollment form submitted:", formData);
+    toast({
+      title: "Enrollment Submitted!",
+      description: "We'll contact you within 24 hours to confirm your enrollment.",
+    });
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -199,24 +189,30 @@ const Enrollment = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="college">College/University *</Label>
-                      <Input 
-                        id="college" 
-                        value={formData.college}
-                        onChange={(e) => handleInputChange('college', e.target.value)}
-                        placeholder="Enter your college/university name" 
-                        required 
-                      />
+                      <Select value={formData.college} onValueChange={(value) => handleInputChange('college', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your college" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {indianColleges.map((college) => (
+                            <SelectItem key={college} value={college}>{college}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="degree">Degree *</Label>
-                      <Input 
-                        id="degree" 
-                        value={formData.degree}
-                        onChange={(e) => handleInputChange('degree', e.target.value)}
-                        placeholder="Enter your degree (e.g., B.Tech, BCA, etc.)" 
-                        required 
-                      />
+                      <Select value={formData.degree} onValueChange={(value) => handleInputChange('degree', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your degree" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {indianDegrees.map((degree) => (
+                            <SelectItem key={degree} value={degree}>{degree}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
 
@@ -299,9 +295,8 @@ const Enrollment = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-primary-600 hover:bg-primary-700 text-lg py-3"
-                  disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting..." : "Submit Enrollment"}
+                  Submit Enrollment
                 </Button>
               </form>
             </CardContent>

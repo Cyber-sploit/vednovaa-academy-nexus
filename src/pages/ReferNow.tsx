@@ -9,12 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Users, Gift } from "lucide-react";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 
 const ReferNow = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     yourName: "",
     yourEmail: "",
@@ -26,52 +22,11 @@ const ReferNow = () => {
     message: ""
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { error } = await supabase
-        .from('referral_submissions')
-        .insert([{
-          your_name: formData.yourName,
-          your_email: formData.yourEmail,
-          your_contact: formData.yourContact,
-          refer_type: formData.referType,
-          refer_name: formData.referName,
-          refer_email: formData.referEmail,
-          refer_contact: formData.referContact,
-          message: formData.message
-        }]);
-
-      if (error) throw error;
-
-      toast({
-        title: "Referral Submitted!",
-        description: "Thank you for your referral! We'll get in touch with both you and your referral soon.",
-      });
-
-      // Reset form
-      setFormData({
-        yourName: "",
-        yourEmail: "",
-        yourContact: "",
-        referType: "",
-        referName: "",
-        referEmail: "",
-        referContact: "",
-        message: ""
-      });
-    } catch (error) {
-      console.error('Error submitting referral:', error);
-      toast({
-        title: "Error",
-        description: "There was an error submitting your referral. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Here you would typically send the data to your backend
+    console.log("Referral submitted:", formData);
+    alert("Thank you for your referral! We'll get in touch with both you and your referral soon.");
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -266,12 +221,8 @@ const ReferNow = () => {
                   </p>
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-primary-600 hover:bg-primary-700 text-lg py-3"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Submitting..." : "Submit Referral"}
+                <Button type="submit" className="w-full bg-primary-600 hover:bg-primary-700 text-lg py-3">
+                  Submit Referral
                 </Button>
               </form>
             </CardContent>
