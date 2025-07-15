@@ -10,6 +10,8 @@ import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import EBooks from "./pages/EBooks";
 import EBookPreview from "./pages/EBookPreview";
+import EBookDetail from "./pages/EBookDetail";
+import EBookThankYou from "./pages/EBookThankYou";
 import Labs from "./pages/Labs";
 import Podcast from "./pages/Podcast";
 import Blogs from "./pages/Blogs";
@@ -35,6 +37,8 @@ const App: React.FC = () => {
             <Route path="/course/:courseSlug" element={<CourseDetail />} />
             <Route path="/ebooks" element={<EBooks />} />
             <Route path="/ebook/:ebookSlug" element={<EBookPreview />} />
+            <Route path="/ebook-detail/:slug" element={<EBookDetail />} />
+            <Route path="/ebook-thankyou/:slug" element={<EBookThankYou />} />
             <Route path="/labs" element={<Labs />} />
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/blogs" element={<Blogs />} />
