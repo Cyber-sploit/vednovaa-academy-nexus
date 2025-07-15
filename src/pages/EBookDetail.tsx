@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, ShoppingCart, CheckCircle, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const EBookDetail = () => {
   const { slug } = useParams();
@@ -51,7 +51,7 @@ Designed for students, freshers, and career switchers, this is not just a PDF â€
     }
   };
 
-  const handlePaymentVerification = () => {
+  const handlePaymentVerification = async () => {
     if (!transactionId.trim()) {
       toast({
         title: "Transaction ID Required",
@@ -71,9 +71,28 @@ Designed for students, freshers, and career switchers, this is not just a PDF â€
     }
 
     setPaymentProcessing(true);
-    // Simulate payment verification process
-    setTimeout(() => {
-      setPaymentProcessing(false);
+
+    try {
+      // Call the verify-transaction edge function
+      const { data, error } = await supabase.functions.invoke('verify-transaction', {
+        body: {
+          transactionId: transactionId.trim(),
+          ebookSlug: slug
+        }
+      });
+
+      if (error || !data?.valid) {
+        console.error('Transaction verification failed:', error || data);
+        toast({
+          title: "Payment Verification Failed",
+          description: data?.error || "Invalid transaction ID or payment not found. Please check your transaction ID and try again.",
+          variant: "destructive",
+        });
+        setPaymentProcessing(false);
+        return;
+      }
+
+      // Payment verified successfully
       setPaymentStep('complete');
       toast({
         title: "Payment Verified!",
@@ -84,7 +103,17 @@ Designed for students, freshers, and career switchers, this is not just a PDF â€
       setTimeout(() => {
         navigate(`/ebook-thankyou/${slug}?verified=true&txn=${transactionId}`);
       }, 2000);
-    }, 3000);
+
+    } catch (error) {
+      console.error('Payment verification error:', error);
+      toast({
+        title: "Verification Error",
+        description: "An error occurred while verifying your payment. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setPaymentProcessing(false);
+    }
   };
 
   if (!ebook) {
@@ -195,6 +224,12 @@ Designed for students, freshers, and career switchers, this is not just a PDF â€
                         <p className="text-gray-700 mb-4">
                           Please enter your transaction ID to verify your payment of {ebook.price}
                         </p>
+                        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
+                          <p className="text-sm text-yellow-800">
+                            <strong>Important:</strong> Only valid transaction IDs from completed payments will be accepted. 
+                            Random numbers will be rejected by our verification system.
+                          </p>
+                        </div>
                       </div>
                       
                       <div>

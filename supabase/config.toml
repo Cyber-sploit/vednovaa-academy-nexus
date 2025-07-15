@@ -1,1 +1,8 @@
+
 project_id = "abdqbysxgrdkuzizweci"
+
+[functions.verify-transaction]
+verify_jwt = false
+
+[functions.add-transaction]
+verify_jwt = false

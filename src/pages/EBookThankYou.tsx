@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Download, BookOpen, AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const EBookThankYou = () => {
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const [isVerified, setIsVerified] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [transactionId, setTransactionId] = useState('');
+  const [verificationError, setVerificationError] = useState('');
 
   const ebookData = {
     "cybersecurity-beginners-guide": {
@@ -23,18 +26,46 @@ const EBookThankYou = () => {
   const ebook = ebookData[slug as keyof typeof ebookData];
 
   useEffect(() => {
-    // Check if payment was verified
-    const verified = searchParams.get('verified') === 'true';
-    const txnId = searchParams.get('txn');
-    
-    if (verified && txnId) {
-      setIsVerified(true);
-      setTransactionId(txnId);
-    }
-  }, [searchParams]);
+    const verifyTransaction = async () => {
+      const verified = searchParams.get('verified') === 'true';
+      const txnId = searchParams.get('txn');
+      
+      if (!verified || !txnId || !slug) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        // Double-check the transaction with the server
+        const { data, error } = await supabase.functions.invoke('verify-transaction', {
+          body: {
+            transactionId: txnId,
+            ebookSlug: slug
+          }
+        });
+
+        if (error || !data?.valid) {
+          console.error('Transaction re-verification failed:', error || data);
+          setVerificationError(data?.error || 'Transaction could not be verified');
+          setIsVerified(false);
+        } else {
+          setIsVerified(true);
+          setTransactionId(txnId);
+        }
+      } catch (error) {
+        console.error('Transaction verification error:', error);
+        setVerificationError('An error occurred while verifying your transaction');
+        setIsVerified(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    verifyTransaction();
+  }, [searchParams, slug]);
 
   const handleDownload = () => {
-    if (isVerified) {
+    if (isVerified && ebook) {
       window.open(ebook.downloadLink, '_blank');
     }
   };
@@ -54,6 +85,22 @@ const EBookThankYou = () => {
     );
   }
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto mb-4"></div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Verifying Payment...</h1>
+            <p className="text-gray-600">Please wait while we verify your transaction.</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   if (!isVerified) {
     return (
       <div className="min-h-screen bg-white">
@@ -66,7 +113,7 @@ const EBookThankYou = () => {
               <AlertTriangle className="h-16 w-16 mx-auto mb-6 text-red-200" />
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Access Denied</h1>
               <p className="text-xl text-red-100 max-w-3xl mx-auto">
-                Payment verification required to access this content
+                Payment verification failed
               </p>
             </div>
           </div>
@@ -78,13 +125,19 @@ const EBookThankYou = () => {
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl text-red-700 mb-4">
                   <AlertTriangle className="h-8 w-8 mx-auto mb-2 text-red-600" />
-                  Payment Not Verified
+                  Payment Verification Failed
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center">
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                    <p className="text-red-800 font-medium">
+                      {verificationError || 'We could not verify your payment for this e-book.'}
+                    </p>
+                  </div>
+                  
                   <p className="text-gray-700 mb-8">
-                    We couldn't verify your payment for this e-book. Please complete the payment process to access your download.
+                    Please ensure you have completed the payment process with a valid transaction ID.
                   </p>
                   
                   <Button 
@@ -92,7 +145,7 @@ const EBookThankYou = () => {
                     className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 text-lg"
                   >
                     <BookOpen className="h-5 w-5 mr-2" />
-                    Complete Payment
+                    Try Again
                   </Button>
                 </div>
 
@@ -102,6 +155,7 @@ const EBookThankYou = () => {
                     <ul className="text-yellow-800 space-y-1 text-sm">
                       <li>• Make sure you completed the payment via the QR code</li>
                       <li>• Verify your transaction ID was entered correctly</li>
+                      <li>• Only legitimate transaction IDs from completed payments are accepted</li>
                       <li>• Contact support if you've already paid but can't access your download</li>
                     </ul>
                   </div>
@@ -173,7 +227,7 @@ const EBookThankYou = () => {
                   <h4 className="font-semibold text-blue-900 mb-2">Important Notes:</h4>
                   <ul className="text-blue-800 space-y-1 text-sm">
                     <li>• Save the downloaded file to your preferred location</li>
-                    <li>• You can access this download link anytime with your transaction ID</li>
+                    <li>• You can access this download link anytime with your verified transaction ID</li>
                     <li>• For any issues, please contact our support team with your transaction ID: {transactionId}</li>
                   </ul>
                 </div>
