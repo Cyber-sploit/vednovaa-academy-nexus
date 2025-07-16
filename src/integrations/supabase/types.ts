@@ -44,6 +44,33 @@ export type Database = {
         }
         Relationships: []
       }
+      ebook_email_requests: {
+        Row: {
+          created_at: string
+          ebook_slug: string
+          email: string
+          id: string
+          payment_status: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          ebook_slug: string
+          email: string
+          id?: string
+          payment_status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          ebook_slug?: string
+          email?: string
+          id?: string
+          payment_status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       enrollment_submissions: {
         Row: {
           batch_month: string
