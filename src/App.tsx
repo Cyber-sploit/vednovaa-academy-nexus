@@ -11,7 +11,6 @@ import CourseDetail from "./pages/CourseDetail";
 import EBooks from "./pages/EBooks";
 import EBookPreview from "./pages/EBookPreview";
 import EBookDetail from "./pages/EBookDetail";
-import EBookVerify from "./pages/EBookVerify";
 import EBookThankYou from "./pages/EBookThankYou";
 import Labs from "./pages/Labs";
 import Podcast from "./pages/Podcast";
@@ -39,8 +38,7 @@ const App: React.FC = () => {
             <Route path="/ebooks" element={<EBooks />} />
             <Route path="/ebook/:ebookSlug" element={<EBookPreview />} />
             <Route path="/ebook-detail/:slug" element={<EBookDetail />} />
-            <Route path="/ebook/:slug/verify" element={<EBookVerify />} />
-            <Route path="/ebook/:slug/thank-you" element={<EBookThankYou />} />
+            <Route path="/ebook-thankyou/:slug" element={<EBookThankYou />} />
             <Route path="/labs" element={<Labs />} />
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/blogs" element={<Blogs />} />
