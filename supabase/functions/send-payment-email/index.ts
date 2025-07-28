@@ -57,7 +57,7 @@ const handler = async (req: Request): Promise<Response> => {
     const paymentConfirmUrl = `${qrCodeUrl.replace(/\/[^/]*$/, '')}/ebook/${ebookSlug}/verify?token=${emailRequest.verification_token}`;
 
     const emailResponse = await resend.emails.send({
-      from: "Vednovaa <onboarding@resend.dev>",
+      from: "Vednovaa <noreply@yourdomain.com>", // Replace with your verified domain
       to: [email],
       subject: `Payment Link for ${ebookTitle}`,
       html: `
