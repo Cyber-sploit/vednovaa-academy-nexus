@@ -52,7 +52,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Stored email request:", emailRequest);
 
-    // Send payment email with QR code
+    // Send payment email with QR code and verification link
+    const verificationUrl = `${Deno.env.get("SUPABASE_URL")?.replace('//', '//').replace('supabase.co', 'supabase.co')}/functions/v1/verify-payment`;
+    const paymentConfirmUrl = `${qrCodeUrl.replace(/\/[^/]*$/, '')}/ebook/${ebookSlug}/verify?token=${emailRequest.verification_token}`;
+
     const emailResponse = await resend.emails.send({
       from: "Vednovaa <onboarding@resend.dev>",
       to: [email],
@@ -76,9 +79,12 @@ const handler = async (req: Request): Promise<Response> => {
             </div>
           </div>
           
-          <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
-            <h4 style="color: #1976d2; margin-bottom: 10px;">After Payment:</h4>
-            <p style="color: #333; margin-bottom: 0;">Once you complete the payment, you'll receive another email with the download link for your e-book.</p>
+          <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+            <h4 style="color: #2e7d32; margin-bottom: 15px;">After Payment:</h4>
+            <p style="color: #333; margin-bottom: 15px;">Once you complete the payment, click the button below to confirm and download your e-book:</p>
+            <div style="text-align: center;">
+              <a href="${paymentConfirmUrl}" style="display: inline-block; background: #2e7d32; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">I've Completed Payment - Download E-Book</a>
+            </div>
           </div>
           
           <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
