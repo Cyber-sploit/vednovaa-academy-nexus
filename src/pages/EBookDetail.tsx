@@ -4,13 +4,20 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, ShoppingCart, CheckCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { BookOpen, Mail, Send } from "lucide-react";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/components/ui/use-toast";
 
 const EBookDetail = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const { toast } = useToast();
+  const [email, setEmail] = useState("");
+  const [emailSending, setEmailSending] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   const ebookData = {
     "cybersecurity-beginners-guide": {
@@ -37,12 +44,51 @@ Designed for students, freshers, and career switchers, this is not just a PDF â€
 
   const ebook = ebookData[slug as keyof typeof ebookData];
 
-  const handlePaymentConfirmation = () => {
-    setPaymentProcessing(true);
-    // Simulate payment processing
-    setTimeout(() => {
-      navigate(`/ebook-thankyou/${slug}`);
-    }, 2000);
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSendPaymentLink = async () => {
+    if (!validateEmail(email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setEmailSending(true);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('send-payment-email', {
+        body: {
+          email,
+          ebookSlug: slug,
+          ebookTitle: ebook.title,
+          ebookPrice: ebook.price,
+          qrCodeUrl: `${window.location.origin}${ebook.qrCode}`
+        }
+      });
+
+      if (error) throw error;
+
+      setEmailSent(true);
+      toast({
+        title: "Payment Link Sent!",
+        description: "Check your email for the payment QR code and instructions.",
+      });
+    } catch (error) {
+      console.error('Error sending payment email:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send payment link. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setEmailSending(false);
+    }
   };
 
   if (!ebook) {
@@ -111,39 +157,81 @@ Designed for students, freshers, and career switchers, this is not just a PDF â€
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Complete Your Purchase</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Mail className="h-5 w-5" />
+                    Get Payment Link
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-center">
-                    <p className="text-gray-600 mb-4">Scan the QR code below to pay {ebook.price}</p>
-                    <div className="inline-block bg-white p-4 rounded-lg shadow-md">
-                      <img 
-                        src={ebook.qrCode} 
-                        alt="Payment QR Code"
-                        className="w-64 h-64 mx-auto"
-                      />
+                  {!emailSent ? (
+                    <>
+                      <div className="text-center mb-6">
+                        <p className="text-gray-600">
+                          Enter your email address to receive the payment QR code and instructions.
+                        </p>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <Label htmlFor="email">Email Address</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="Enter your email address"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="mt-1"
+                          />
+                        </div>
+                        
+                        <Button 
+                          onClick={handleSendPaymentLink}
+                          disabled={emailSending || !email}
+                          className="w-full"
+                        >
+                          {emailSending ? (
+                            <>Sending...</>
+                          ) : (
+                            <>
+                              <Send className="h-4 w-4 mr-2" />
+                              Send me Payment Link
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-center space-y-4">
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <div className="flex items-center justify-center mb-2">
+                          <Mail className="h-8 w-8 text-green-600" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-green-800 mb-2">
+                          Payment Link Sent!
+                        </h3>
+                        <p className="text-green-700">
+                          We've sent the payment QR code and instructions to <strong>{email}</strong>
+                        </p>
+                      </div>
+                      
+                      <div className="text-sm text-gray-600 space-y-2">
+                        <p>â€¢ Check your email for the payment QR code</p>
+                        <p>â€¢ Complete the payment using the provided instructions</p>
+                        <p>â€¢ You'll receive the download link after payment confirmation</p>
+                      </div>
+                      
+                      <Button 
+                        variant="outline"
+                        onClick={() => {
+                          setEmailSent(false);
+                          setEmail("");
+                        }}
+                        className="w-full"
+                      >
+                        Send to Different Email
+                      </Button>
                     </div>
-                  </div>
-                  
-                  <div className="pt-6 border-t">
-                    <p className="text-sm text-gray-600 mb-4 text-center">
-                      After completing the payment, click the button below to confirm and download your e-book.
-                    </p>
-                    <Button 
-                      onClick={handlePaymentConfirmation}
-                      disabled={paymentProcessing}
-                      className="w-full bg-green-600 hover:bg-green-700 text-white py-3"
-                    >
-                      {paymentProcessing ? (
-                        <>Processing...</>
-                      ) : (
-                        <>
-                          <CheckCircle className="h-5 w-5 mr-2" />
-                          I have completed the payment
-                        </>
-                      )}
-                    </Button>
-                  </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
