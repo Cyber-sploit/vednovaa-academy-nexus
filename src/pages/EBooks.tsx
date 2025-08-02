@@ -9,11 +9,32 @@ import { Link } from "react-router-dom";
 const EBooks = () => {
   const ebooks = [
     {
-      title: "Break Into Cybersecurity: A Beginner's Guide to Career Roadmaps & Skill Paths",
-      description: "Your complete guide to starting a successful cybersecurity career with clear roadmaps and actionable plans.",
-      price: "₹99",
-      slug: "cybersecurity-beginners-guide",
-      coverImage: "/lovable-uploads/4cc44e3c-0bb3-4357-bbcb-b0dd68dba890.png"
+      title: "Python Programming Mastery: From Beginner to Expert",
+      description: "Complete guide to Python programming with practical examples, projects, and advanced concepts.",
+      price: "₹149",
+      slug: "python-programming-mastery",
+      coverImage: "/placeholder.svg"
+    },
+    {
+      title: "AI/ML Complete Handbook: Theory to Practice",
+      description: "Comprehensive guide covering machine learning algorithms, neural networks, and real-world applications.",
+      price: "₹199",
+      slug: "ai-ml-handbook",
+      coverImage: "/placeholder.svg"
+    },
+    {
+      title: "Data Analysis with Python: Pandas & NumPy Guide",
+      description: "Master data manipulation, analysis, and visualization using Python's most powerful libraries.",
+      price: "₹129",
+      slug: "data-analysis-python",
+      coverImage: "/placeholder.svg"
+    },
+    {
+      title: "Cybersecurity Fundamentals: Protect & Defend",
+      description: "Essential cybersecurity concepts, ethical hacking techniques, and network security practices.",
+      price: "₹169",
+      slug: "cybersecurity-fundamentals",
+      coverImage: "/placeholder.svg"
     },
   ];
 
