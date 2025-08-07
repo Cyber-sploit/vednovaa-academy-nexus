@@ -1,4 +1,3 @@
-
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Star, Clock, BookOpen, ChevronDown } from "lucide-react";
+import { Star, Clock, BookOpen, ChevronDown, Brain, Code, BarChart3, Shield, Briefcase, Laptop, DollarSign, Dna } from "lucide-react";
 import { useState } from "react";
 
 const CourseDetail = () => {
@@ -20,7 +19,9 @@ const CourseDetail = () => {
       description: "Master artificial intelligence and machine learning with hands-on Python programming. This comprehensive course covers everything from basic machine learning concepts to advanced deep learning techniques.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
+      icon: Brain,
+      iconColor: "text-purple-600",
+      bgColor: "bg-purple-100",
       curriculum: [
         "Introduction to Python Programming and AI Fundamentals",
         "Data Structures and Mathematical Foundations",
@@ -43,7 +44,9 @@ const CourseDetail = () => {
       description: "Learn Python from basics to advanced concepts with real-world projects. Perfect for beginners and those looking to strengthen their programming foundation.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=800&h=600&fit=crop",
+      icon: Code,
+      iconColor: "text-green-600",
+      bgColor: "bg-green-100",
       curriculum: [
         "Python Basics: Syntax, Variables, and Data Types",
         "Control Structures: Loops, Conditionals, and Logic",
@@ -66,7 +69,9 @@ const CourseDetail = () => {
       description: "Transform raw data into actionable insights using modern analytical tools and techniques. Learn to work with real-world datasets and create meaningful visualizations.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      icon: BarChart3,
+      iconColor: "text-blue-600",
+      bgColor: "bg-blue-100",
       curriculum: [
         "Introduction to Data Analysis and Statistical Thinking",
         "Excel for Data Analysis: Advanced Functions and Formulas",
@@ -89,7 +94,9 @@ const CourseDetail = () => {
       description: "Protect digital assets and learn ethical hacking techniques. Comprehensive coverage of cybersecurity principles, tools, and best practices.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop",
+      icon: Shield,
+      iconColor: "text-red-600",
+      bgColor: "bg-red-100",
       curriculum: [
         "Cybersecurity Fundamentals and Threat Landscape",
         "Network Security Architecture and Protocols",
@@ -112,7 +119,9 @@ const CourseDetail = () => {
       description: "Bridge the gap between business needs and technical solutions. Learn to analyze requirements, create documentation, and drive successful project outcomes.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop",
+      icon: Briefcase,
+      iconColor: "text-orange-600",
+      bgColor: "bg-orange-100",
       curriculum: [
         "Business Analysis Fundamentals and Role Definition",
         "Requirements Gathering Techniques and Best Practices",
@@ -135,7 +144,9 @@ const CourseDetail = () => {
       description: "Comprehensive full-stack development program covering frontend, backend, databases, and deployment. Build complete web applications from scratch.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
+      icon: Laptop,
+      iconColor: "text-indigo-600",
+      bgColor: "bg-indigo-100",
       curriculum: [
         "HTML5 Fundamentals and Semantic Web Structure",
         "CSS3 Advanced Styling and Responsive Design",
@@ -158,7 +169,9 @@ const CourseDetail = () => {
       description: "Financial modeling, analysis, and investment strategies. Learn essential finance concepts and tools used in modern financial markets.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop",
+      icon: DollarSign,
+      iconColor: "text-emerald-600",
+      bgColor: "bg-emerald-100",
       curriculum: [
         "Financial Markets Overview and Investment Fundamentals",
         "Financial Statement Analysis and Interpretation",
@@ -181,7 +194,9 @@ const CourseDetail = () => {
       description: "Apply computational techniques to biological data analysis. Explore the intersection of biology, computer science, and data analysis.",
       rating: 0,
       duration: "25 Hours",
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop",
+      icon: Dna,
+      iconColor: "text-pink-600",
+      bgColor: "bg-pink-100",
       curriculum: [
         "Introduction to Bioinformatics and Computational Biology",
         "Biological Databases and Data Resources",
@@ -262,11 +277,9 @@ const CourseDetail = () => {
             </div>
             
             <div className="animate-fade-in-scale" style={{ animationDelay: '0.3s' }}>
-              <img 
-                src={course.image} 
-                alt={course.title}
-                className="rounded-lg shadow-2xl w-full h-80 object-cover"
-              />
+              <div className={`${course.bgColor} rounded-lg shadow-2xl w-full h-80 flex items-center justify-center`}>
+                <course.icon className={`h-32 w-32 ${course.iconColor}`} />
+              </div>
             </div>
           </div>
         </div>

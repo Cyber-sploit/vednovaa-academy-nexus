@@ -1,11 +1,10 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CourseCard from "@/components/CourseCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, Award, Clock, GraduationCap, Target, Lightbulb, Brain, Code, Shield, BarChart3, TrendingUp, Star } from "lucide-react";
+import { BookOpen, Users, Award, Clock, GraduationCap, Target, Lightbulb, Brain, Code, Shield, BarChart3, TrendingUp, Star, Database, FlaskConical, DollarSign, Dna } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 
 const Index = () => {
@@ -27,21 +26,27 @@ const Index = () => {
       title: "AI/ML with Python",
       description: "Master artificial intelligence and machine learning",
       enrollments: "0 Enrolled",
-      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop",
+      icon: Brain,
+      iconColor: "text-purple-600",
+      bgColor: "bg-purple-100",
       slug: "ai-ml-python"
     },
     {
       title: "Data Analysis", 
       description: "Transform data into actionable insights",
       enrollments: "0 Enrolled",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      icon: BarChart3,
+      iconColor: "text-blue-600",
+      bgColor: "bg-blue-100",
       slug: "data-analysis"
     },
     {
       title: "Cyber Security",
       description: "Protect digital assets and networks", 
       enrollments: "0 Enrolled",
-      image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop",
+      icon: Shield,
+      iconColor: "text-red-600",
+      bgColor: "bg-red-100",
       slug: "cyber-security"
     },
   ];
@@ -128,52 +133,83 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Educational Elements instead of image */}
+            {/* Educational Dashboard Visualization */}
             <div className="animate-fade-in-scale relative" style={{ animationDelay: '0.3s' }}>
               <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                {/* Floating Education Icons */}
-                <div className="grid grid-cols-3 gap-6 mb-8">
-                  <div className="bg-white/20 rounded-xl p-4 text-center transform hover:scale-110 transition-all duration-300">
-                    <Brain className="h-8 w-8 mx-auto mb-2 text-primary-200" />
-                    <p className="text-sm font-medium">AI/ML</p>
+                {/* Course Categories Grid */}
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="bg-white/20 rounded-xl p-6 text-center transform hover:scale-110 transition-all duration-300">
+                    <Brain className="h-12 w-12 mx-auto mb-3 text-purple-300" />
+                    <p className="text-sm font-medium text-white">AI & ML</p>
+                    <p className="text-xs text-primary-200">Next-Gen Tech</p>
                   </div>
-                  <div className="bg-white/20 rounded-xl p-4 text-center transform hover:scale-110 transition-all duration-300">
-                    <Code className="h-8 w-8 mx-auto mb-2 text-primary-200" />
-                    <p className="text-sm font-medium">Programming</p>
+                  <div className="bg-white/20 rounded-xl p-6 text-center transform hover:scale-110 transition-all duration-300">
+                    <Code className="h-12 w-12 mx-auto mb-3 text-green-300" />
+                    <p className="text-sm font-medium text-white">Programming</p>
+                    <p className="text-xs text-primary-200">Full Stack</p>
                   </div>
-                  <div className="bg-white/20 rounded-xl p-4 text-center transform hover:scale-110 transition-all duration-300">
-                    <Shield className="h-8 w-8 mx-auto mb-2 text-primary-200" />
-                    <p className="text-sm font-medium">Security</p>
+                  <div className="bg-white/20 rounded-xl p-6 text-center transform hover:scale-110 transition-all duration-300">
+                    <BarChart3 className="h-12 w-12 mx-auto mb-3 text-blue-300" />
+                    <p className="text-sm font-medium text-white">Data Science</p>
+                    <p className="text-xs text-primary-200">Analytics</p>
                   </div>
-                </div>
-                
-                {/* Learning Path Visualization */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
-                    <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-bold text-primary-800">1</span>
-                    </div>
-                    <span className="text-primary-100">Learn Fundamentals</span>
-                  </div>
-                  <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
-                    <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-bold text-primary-800">2</span>
-                    </div>
-                    <span className="text-primary-100">Practice Projects</span>
-                  </div>
-                  <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
-                    <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-bold text-primary-800">3</span>
-                    </div>
-                    <span className="text-primary-100">Get Certified</span>
+                  <div className="bg-white/20 rounded-xl p-6 text-center transform hover:scale-110 transition-all duration-300">
+                    <Shield className="h-12 w-12 mx-auto mb-3 text-red-300" />
+                    <p className="text-sm font-medium text-white">Security</p>
+                    <p className="text-xs text-primary-200">Cyber Defense</p>
                   </div>
                 </div>
                 
-                {/* Achievement Badge */}
-                <div className="mt-6 text-center">
-                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-orange-900 px-4 py-2 rounded-full font-semibold">
-                    <Star className="h-4 w-4" />
-                    Industry Ready Skills
+                {/* Learning Progress Indicator */}
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center justify-between bg-white/10 rounded-lg p-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
+                        <BookOpen className="h-4 w-4 text-primary-800" />
+                      </div>
+                      <span className="text-primary-100 text-sm">Live Sessions</span>
+                    </div>
+                    <div className="w-16 h-2 bg-white/20 rounded-full">
+                      <div className="w-12 h-2 bg-green-400 rounded-full"></div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between bg-white/10 rounded-lg p-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
+                        <Target className="h-4 w-4 text-primary-800" />
+                      </div>
+                      <span className="text-primary-100 text-sm">Projects</span>
+                    </div>
+                    <div className="w-16 h-2 bg-white/20 rounded-full">
+                      <div className="w-10 h-2 bg-blue-400 rounded-full"></div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between bg-white/10 rounded-lg p-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-primary-300 rounded-full flex items-center justify-center">
+                        <Award className="h-4 w-4 text-primary-800" />
+                      </div>
+                      <span className="text-primary-100 text-sm">Certification</span>
+                    </div>
+                    <div className="w-16 h-2 bg-white/20 rounded-full">
+                      <div className="w-14 h-2 bg-yellow-400 rounded-full"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Stats Display */}
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-white">8+</div>
+                    <div className="text-xs text-primary-200">Courses</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-white">25h</div>
+                    <div className="text-xs text-primary-200">Duration</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-white">100%</div>
+                    <div className="text-xs text-primary-200">Industry Ready</div>
                   </div>
                 </div>
               </div>
@@ -214,12 +250,8 @@ const Index = () => {
             {popularCourses.map((course, index) => (
               <div key={index} className="animate-fade-in-scale" style={{ animationDelay: `${index * 0.2}s` }}>
                 <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full">
-                  <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
-                    <img 
-                      src={course.image} 
-                      alt={course.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
+                  <div className={`aspect-video ${course.bgColor} flex items-center justify-center overflow-hidden`}>
+                    <course.icon className={`h-24 w-24 ${course.iconColor}`} />
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-gray-900 mb-2">{course.title}</h3>
