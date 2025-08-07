@@ -25,15 +25,6 @@ const ScheduleMeeting = () => {
     purpose: ""
   });
 
-  const timeSlots = [
-    "10:00 AM",
-    "11:00 AM", 
-    "2:00 PM",
-    "3:00 PM",
-    "4:00 PM",
-    "5:00 PM"
-  ];
-
   const purposes = [
     "Course Inquiry",
     "Career Guidance",
@@ -175,21 +166,17 @@ const ScheduleMeeting = () => {
             </div>
             <div className="space-y-2">
               <Label htmlFor="time">Preferred Time *</Label>
-              <Select value={selectedTime} onValueChange={setSelectedTime}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select time" />
-                </SelectTrigger>
-                <SelectContent>
-                  {timeSlots.map((time) => (
-                    <SelectItem key={time} value={time}>
-                      <div className="flex items-center space-x-2">
-                        <Clock className="h-4 w-4" />
-                        <span>{time}</span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <Clock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <Input
+                  id="time"
+                  type="time"
+                  value={selectedTime}
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                  className="pl-10"
+                  required
+                />
+              </div>
             </div>
           </div>
 
