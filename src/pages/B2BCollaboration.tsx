@@ -38,10 +38,10 @@ const B2BCollaboration = () => {
   ];
 
   const steps = [
-    { step: "Step 1", title: "Initial Discussion", description: "Understanding your requirements and student needs" },
-    { step: "Step 2", title: "Custom Program Proposal", description: "Tailored curriculum design based on your goals" },
-    { step: "Step 3", title: "Integration & Onboarding", description: "Seamless setup and platform integration" },
-    { step: "Step 4", title: "Training & Support", description: "Ongoing support and performance monitoring" },
+    { step: "Step 1", title: "Initial Discussion", description: "Understanding your college requirements and student goals" },
+    { step: "Step 2", title: "Program Selection", description: "Choose from our industry-proven courses and training modules" },
+    { step: "Step 3", title: "Integration & Setup", description: "Seamless onboarding with minimal disruption to existing curriculum" },
+    { step: "Step 4", title: "Ongoing Support", description: "Continuous mentorship, progress tracking, and placement assistance" },
   ];
 
   return (
@@ -97,8 +97,9 @@ const B2BCollaboration = () => {
               How We Collaborate
             </h2>
             <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-              We work with colleges to integrate our programs into your curriculum or offer them as add-on courses. 
-              From live classes to self-paced content, we ensure students gain job-ready skills with hands-on training.
+              We partner with colleges to seamlessly integrate our proven industry courses into your academic ecosystem. 
+              Our comprehensive programs in AI/ML, Cybersecurity, Data Analysis, and Programming are designed to bridge 
+              the gap between classroom learning and industry requirements, ensuring your students graduate job-ready.
             </p>
           </div>
 
