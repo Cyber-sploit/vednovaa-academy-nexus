@@ -33,7 +33,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from('contact_submissions')
         .insert([{
           first_name: formData.firstName,
