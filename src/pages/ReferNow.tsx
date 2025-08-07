@@ -31,7 +31,7 @@ const ReferNow = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from('referral_submissions')
         .insert([{
           your_name: formData.yourName,

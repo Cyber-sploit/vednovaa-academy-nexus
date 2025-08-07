@@ -9,7 +9,159 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      contact_submissions: {
+        Row: {
+          created_at: string | null
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          message: string
+          phone: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          message: string
+          phone: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          message?: string
+          phone?: string
+        }
+        Relationships: []
+      }
+      enrollment_submissions: {
+        Row: {
+          batch_month: string
+          college: string
+          course: string
+          created_at: string | null
+          degree: string
+          email: string
+          gender: string
+          id: string
+          name: string
+          phone: string
+          slot: string
+          timing: string
+          year: string
+        }
+        Insert: {
+          batch_month: string
+          college: string
+          course: string
+          created_at?: string | null
+          degree: string
+          email: string
+          gender: string
+          id?: string
+          name: string
+          phone: string
+          slot: string
+          timing: string
+          year: string
+        }
+        Update: {
+          batch_month?: string
+          college?: string
+          course?: string
+          created_at?: string | null
+          degree?: string
+          email?: string
+          gender?: string
+          id?: string
+          name?: string
+          phone?: string
+          slot?: string
+          timing?: string
+          year?: string
+        }
+        Relationships: []
+      }
+      meeting_schedules: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          name: string
+          phone: string
+          purpose: string
+          selected_date: string
+          selected_time: string
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          name: string
+          phone: string
+          purpose: string
+          selected_date: string
+          selected_time: string
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          purpose?: string
+          selected_date?: string
+          selected_time?: string
+          status?: string | null
+        }
+        Relationships: []
+      }
+      referral_submissions: {
+        Row: {
+          created_at: string | null
+          id: string
+          message: string | null
+          refer_contact: string
+          refer_email: string
+          refer_name: string
+          refer_type: string
+          your_contact: string
+          your_email: string
+          your_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          message?: string | null
+          refer_contact: string
+          refer_email: string
+          refer_name: string
+          refer_type: string
+          your_contact: string
+          your_email: string
+          your_name: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          message?: string | null
+          refer_contact?: string
+          refer_email?: string
+          refer_name?: string
+          refer_type?: string
+          your_contact?: string
+          your_email?: string
+          your_name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

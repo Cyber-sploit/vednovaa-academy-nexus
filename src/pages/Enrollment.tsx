@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -89,7 +90,7 @@ const Enrollment = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await (supabase as any)
+      const { error } = await supabase
         .from('enrollment_submissions')
         .insert([{
           name: formData.name,
