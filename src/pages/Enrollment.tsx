@@ -27,43 +27,6 @@ const Enrollment = () => {
     timing: ""
   });
 
-  const indianColleges = [
-    "Indian Institute of Technology, Delhi",
-    "Indian Institute of Technology, Mumbai",
-    "Indian Institute of Technology, Bangalore",
-    "Indian Institute of Technology, Chennai",
-    "Indian Institute of Technology, Kanpur",
-    "Indian Institute of Science, Bangalore",
-    "Delhi University",
-    "Jawaharlal Nehru University",
-    "University of Mumbai",
-    "Anna University",
-    "Pune University",
-    "Calcutta University",
-    "Jamia Millia Islamia",
-    "Aligarh Muslim University",
-    "Banaras Hindu University",
-    "Other"
-  ];
-
-  const indianDegrees = [
-    "Bachelor of Technology (B.Tech)",
-    "Bachelor of Engineering (B.E.)",
-    "Bachelor of Computer Applications (BCA)",
-    "Bachelor of Science (B.Sc)",
-    "Master of Technology (M.Tech)",
-    "Master of Engineering (M.E.)",
-    "Master of Computer Applications (MCA)",
-    "Master of Science (M.Sc)",
-    "Bachelor of Business Administration (BBA)",
-    "Master of Business Administration (MBA)",
-    "Bachelor of Commerce (B.Com)",
-    "Master of Commerce (M.Com)",
-    "Bachelor of Arts (B.A.)",
-    "Master of Arts (M.A.)",
-    "Other"
-  ];
-
   const courses = [
     "AI/ML with Python",
     "Python Programming",
@@ -75,8 +38,8 @@ const Enrollment = () => {
     "Bioinformatics"
   ];
 
+  // Updated months array with disabled months removed
   const months = [
-    "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
 
@@ -236,30 +199,24 @@ const Enrollment = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="college">College/University *</Label>
-                      <Select value={formData.college} onValueChange={(value) => handleInputChange('college', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your college" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {indianColleges.map((college) => (
-                            <SelectItem key={college} value={college}>{college}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Input 
+                        id="college" 
+                        value={formData.college}
+                        onChange={(e) => handleInputChange('college', e.target.value)}
+                        placeholder="Enter your college/university name" 
+                        required 
+                      />
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="degree">Degree *</Label>
-                      <Select value={formData.degree} onValueChange={(value) => handleInputChange('degree', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your degree" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {indianDegrees.map((degree) => (
-                            <SelectItem key={degree} value={degree}>{degree}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Input 
+                        id="degree" 
+                        value={formData.degree}
+                        onChange={(e) => handleInputChange('degree', e.target.value)}
+                        placeholder="Enter your degree (e.g., B.Tech, BCA, etc.)" 
+                        required 
+                      />
                     </div>
                   </div>
 

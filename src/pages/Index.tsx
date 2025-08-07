@@ -204,7 +204,7 @@ const Index = () => {
                     <div className="text-xs text-primary-200">Courses</div>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-white">25h</div>
+                    <div className="text-2xl font-bold text-white">30h</div>
                     <div className="text-xs text-primary-200">Duration</div>
                   </div>
                   <div>
