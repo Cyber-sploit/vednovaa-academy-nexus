@@ -89,7 +89,7 @@ const Enrollment = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('enrollment_submissions')
         .insert([{
           name: formData.name,

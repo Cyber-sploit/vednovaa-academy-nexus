@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScheduleMeeting from "@/components/ScheduleMeeting";
@@ -32,7 +33,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
+      const { error } = await (supabase as any)
         .from('contact_submissions')
         .insert([{
           first_name: formData.firstName,
