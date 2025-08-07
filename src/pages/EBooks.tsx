@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, ShoppingCart } from "lucide-react";
+import { BookOpen, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const EBooks = () => {
@@ -11,28 +11,24 @@ const EBooks = () => {
     {
       title: "Python Programming Mastery: From Beginner to Expert",
       description: "Complete guide to Python programming with practical examples, projects, and advanced concepts.",
-      price: "₹149",
       slug: "python-programming-mastery",
       coverImage: "/placeholder.svg"
     },
     {
       title: "AI/ML Complete Handbook: Theory to Practice",
       description: "Comprehensive guide covering machine learning algorithms, neural networks, and real-world applications.",
-      price: "₹199",
       slug: "ai-ml-handbook",
       coverImage: "/placeholder.svg"
     },
     {
       title: "Data Analysis with Python: Pandas & NumPy Guide",
       description: "Master data manipulation, analysis, and visualization using Python's most powerful libraries.",
-      price: "₹129",
       slug: "data-analysis-python",
       coverImage: "/placeholder.svg"
     },
     {
       title: "Cybersecurity Fundamentals: Protect & Defend",
       description: "Essential cybersecurity concepts, ethical hacking techniques, and network security practices.",
-      price: "₹169",
       slug: "cybersecurity-fundamentals",
       coverImage: "/placeholder.svg"
     },
@@ -47,9 +43,9 @@ const EBooks = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <BookOpen className="h-16 w-16 mx-auto mb-6 text-primary-200" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Digital Library</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Sample E-Books</h1>
             <p className="text-xl text-primary-100 max-w-3xl mx-auto">
-              Purchase and download our comprehensive e-books to accelerate your learning journey
+              Explore our collection of comprehensive learning resources and guides
             </p>
           </div>
         </div>
@@ -71,15 +67,12 @@ const EBooks = () => {
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold text-gray-900">{ebook.title}</CardTitle>
                   <CardDescription className="text-gray-600">{ebook.description}</CardDescription>
-                  <div className="text-2xl font-bold text-primary-600">{ebook.price}</div>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <Link to={`/ebook-detail/${ebook.slug}`}>
-                    <Button className="w-full bg-primary-600 hover:bg-primary-700">
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      Buy Now
-                    </Button>
-                  </Link>
+                  <Button className="w-full bg-primary-600 hover:bg-primary-700" disabled>
+                    <Eye className="h-4 w-4 mr-2" />
+                    Preview Coming Soon
+                  </Button>
                 </CardContent>
               </Card>
             ))}
