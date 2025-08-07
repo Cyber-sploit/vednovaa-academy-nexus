@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, User, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Blogs = () => {
   const blogPosts = [
@@ -16,15 +17,17 @@ const Blogs = () => {
       category: "Career Advice",
       readTime: "8 min read",
       thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
+      slug: "data-scientist-skills-2024"
     },
     {
       title: "The Rise of AI in Indian Education: Opportunities and Challenges",
       summary: "An in-depth analysis of how artificial intelligence is reshaping the educational landscape in India",
       author: "Prof. Rajesh Kumar",
-      date: "December 12, 2024",
+      date: "December 12, 2024", 
       category: "Industry Trends",
       readTime: "12 min read",
       thumbnail: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600",
+      slug: "ai-indian-education"
     },
     {
       title: "From Zero to Hero: A Student's Journey in Cybersecurity",
@@ -34,6 +37,7 @@ const Blogs = () => {
       category: "Student Success",
       readTime: "6 min read",
       thumbnail: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600",
+      slug: "student-cybersecurity-journey"
     },
     {
       title: "Python vs R: Which Language Should You Choose for Data Analysis?",
@@ -43,6 +47,7 @@ const Blogs = () => {
       category: "Course Insights",
       readTime: "10 min read",
       thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600",
+      slug: "python-vs-r-comparison"
     },
     {
       title: "Building Your First Machine Learning Model: A Step-by-Step Guide",
@@ -52,6 +57,7 @@ const Blogs = () => {
       category: "Educational Resources",
       readTime: "15 min read",
       thumbnail: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600",
+      slug: "first-ml-model-guide"
     },
     {
       title: "The Future of Work: How Technology is Reshaping Careers",
@@ -61,6 +67,7 @@ const Blogs = () => {
       category: "Industry Trends",
       readTime: "9 min read",
       thumbnail: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=600",
+      slug: "future-of-work-technology"
     },
   ];
 
@@ -134,9 +141,11 @@ const Blogs = () => {
                       <span>{post.date}</span>
                     </div>
                   </div>
-                  <Button className="w-full bg-primary-600 hover:bg-primary-700">
-                    Read More
-                  </Button>
+                  <Link to={`/blog/${post.slug}`}>
+                    <Button className="w-full bg-primary-600 hover:bg-primary-700">
+                      Read More
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}

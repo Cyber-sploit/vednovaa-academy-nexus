@@ -6,9 +6,19 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Calendar, Download, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
+  const handleScheduleMeeting = () => {
+    // This would open Google Calendar integration
+    window.open('https://calendar.google.com/calendar/appointments/AcZssZ0', '_blank');
+  };
+
+  const handleDownloadBrochure = () => {
+    window.open('https://drive.google.com/file/d/1_ed-ovWhmM6oLXzrPEY9I1lZslgnHFn2/view?usp=sharing', '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -141,15 +151,28 @@ const Contact = () => {
                   <CardTitle className="text-xl font-semibold">Quick Actions</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start">
-                    Schedule a Demo
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start"
+                    onClick={handleScheduleMeeting}
+                  >
+                    <Calendar className="h-4 w-4 mr-2" />
+                    Schedule a Meeting
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
+                  <Button 
+                    variant="outline" 
+                    className="w-full justify-start"
+                    onClick={handleDownloadBrochure}
+                  >
+                    <Download className="h-4 w-4 mr-2" />
                     Download Brochure
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    Book Counseling Session
-                  </Button>
+                  <Link to="/refer-now">
+                    <Button variant="outline" className="w-full justify-start">
+                      <Users className="h-4 w-4 mr-2" />
+                      Refer Now
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </div>
