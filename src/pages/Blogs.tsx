@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, User, FileText } from "lucide-react";
+import { Calendar, User, FileText, Brain, Code, BarChart3, Shield, Briefcase, Laptop } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -19,8 +19,10 @@ const Blogs = () => {
       date: "December 15, 2024",
       category: "Career Advice",
       readTime: "8 min read",
-      thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
-      slug: "data-scientist-skills-2024"
+      slug: "data-scientist-skills-2024",
+      icon: BarChart3,
+      iconColor: "text-blue-600",
+      bgColor: "bg-blue-100"
     },
     {
       title: "The Rise of AI in Indian Education: Opportunities and Challenges",
@@ -29,8 +31,10 @@ const Blogs = () => {
       date: "December 12, 2024", 
       category: "Industry Trends",
       readTime: "12 min read",
-      thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600",
-      slug: "ai-indian-education"
+      slug: "ai-indian-education",
+      icon: Brain,
+      iconColor: "text-purple-600",
+      bgColor: "bg-purple-100"
     },
     {
       title: "From Zero to Hero: A Student's Journey in Cybersecurity",
@@ -39,8 +43,10 @@ const Blogs = () => {
       date: "December 10, 2024",
       category: "Student Success",
       readTime: "6 min read",
-      thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600",
-      slug: "student-cybersecurity-journey"
+      slug: "student-cybersecurity-journey",
+      icon: Shield,
+      iconColor: "text-red-600",
+      bgColor: "bg-red-100"
     },
     {
       title: "Python vs R: Which Language Should You Choose for Data Analysis?",
@@ -49,8 +55,10 @@ const Blogs = () => {
       date: "December 8, 2024",
       category: "Course Insights",
       readTime: "10 min read",
-      thumbnail: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600",
-      slug: "python-vs-r-comparison"
+      slug: "python-vs-r-comparison",
+      icon: Code,
+      iconColor: "text-green-600",
+      bgColor: "bg-green-100"
     },
     {
       title: "Building Your First Machine Learning Model: A Step-by-Step Guide",
@@ -59,8 +67,10 @@ const Blogs = () => {
       date: "December 5, 2024",
       category: "Educational Resources",
       readTime: "15 min read",
-      thumbnail: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600",
-      slug: "first-ml-model-guide"
+      slug: "first-ml-model-guide",
+      icon: Brain,
+      iconColor: "text-purple-600",
+      bgColor: "bg-purple-100"
     },
     {
       title: "The Future of Work: How Technology is Reshaping Careers",
@@ -69,8 +79,10 @@ const Blogs = () => {
       date: "December 3, 2024",
       category: "Industry Trends",
       readTime: "9 min read",
-      thumbnail: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=600",
-      slug: "future-of-work-technology"
+      slug: "future-of-work-technology",
+      icon: Laptop,
+      iconColor: "text-indigo-600",
+      bgColor: "bg-indigo-100"
     },
   ];
 
@@ -121,12 +133,8 @@ const Blogs = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300 cursor-pointer animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 rounded-t-lg overflow-hidden">
-                  <img 
-                    src={post.thumbnail} 
-                    alt={post.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
+                <div className={`aspect-video ${post.bgColor} rounded-t-lg overflow-hidden flex items-center justify-center`}>
+                  <post.icon className={`h-16 w-16 ${post.iconColor}`} />
                 </div>
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">

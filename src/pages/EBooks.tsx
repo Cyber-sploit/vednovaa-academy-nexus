@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Eye } from "lucide-react";
+import { BookOpen, Eye, Brain, Code, BarChart3, Shield, Briefcase, Laptop, DollarSign, Dna } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const EBooks = () => {
@@ -14,7 +14,9 @@ const EBooks = () => {
       pages: "450 pages",
       format: "PDF",
       slug: "ai-ml-python",
-      thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400"
+      icon: Brain,
+      iconColor: "text-purple-600",
+      bgColor: "bg-purple-100"
     },
     {
       title: "Python Programming",
@@ -22,7 +24,9 @@ const EBooks = () => {
       pages: "320 pages", 
       format: "PDF",
       slug: "python-programming",
-      thumbnail: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400"
+      icon: Code,
+      iconColor: "text-green-600",
+      bgColor: "bg-green-100"
     },
     {
       title: "Data Analysis",
@@ -30,7 +34,9 @@ const EBooks = () => {
       pages: "280 pages",
       format: "PDF",
       slug: "data-analysis",
-      thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400"
+      icon: BarChart3,
+      iconColor: "text-blue-600",
+      bgColor: "bg-blue-100"
     },
     {
       title: "Cyber Security",
@@ -38,7 +44,9 @@ const EBooks = () => {
       pages: "380 pages",
       format: "PDF",
       slug: "cyber-security",
-      thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400"
+      icon: Shield,
+      iconColor: "text-red-600",
+      bgColor: "bg-red-100"
     },
     {
       title: "Business Analysis",
@@ -46,7 +54,9 @@ const EBooks = () => {
       pages: "240 pages",
       format: "PDF",
       slug: "business-analysis",
-      thumbnail: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400"
+      icon: Briefcase,
+      iconColor: "text-orange-600",
+      bgColor: "bg-orange-100"
     },
     {
       title: "Build360",
@@ -54,7 +64,9 @@ const EBooks = () => {
       pages: "520 pages",
       format: "PDF",
       slug: "build360",
-      thumbnail: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400"
+      icon: Laptop,
+      iconColor: "text-indigo-600",
+      bgColor: "bg-indigo-100"
     },
     {
       title: "Finance",
@@ -62,7 +74,9 @@ const EBooks = () => {
       pages: "300 pages",
       format: "PDF",
       slug: "finance",
-      thumbnail: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400"
+      icon: DollarSign,
+      iconColor: "text-emerald-600",
+      bgColor: "bg-emerald-100"
     },
     {
       title: "Bioinformatics",
@@ -70,7 +84,9 @@ const EBooks = () => {
       pages: "290 pages",
       format: "PDF",
       slug: "bioinformatics",
-      thumbnail: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400"
+      icon: Dna,
+      iconColor: "text-pink-600",
+      bgColor: "bg-pink-100"
     },
   ];
 
@@ -97,12 +113,8 @@ const EBooks = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {ebooks.map((ebook, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="aspect-[3/4] bg-gradient-to-br from-primary-100 to-primary-200 rounded-t-lg overflow-hidden">
-                  <img 
-                    src={ebook.thumbnail} 
-                    alt={ebook.title}
-                    className="w-full h-full object-cover"
-                  />
+                <div className={`aspect-[3/4] ${ebook.bgColor} rounded-t-lg overflow-hidden flex items-center justify-center`}>
+                  <ebook.icon className={`h-24 w-24 ${ebook.iconColor}`} />
                 </div>
                 <CardHeader>
                   <CardTitle className="text-lg font-semibold text-gray-900">{ebook.title}</CardTitle>
