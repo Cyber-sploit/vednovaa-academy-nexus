@@ -7,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ScheduleMeeting = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [meetingData, setMeetingData] = useState({
@@ -47,18 +49,43 @@ const ScheduleMeeting = () => {
     "General Consultation"
   ];
 
-  const handleSchedule = (e: React.FormEvent) => {
+  const handleSchedule = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Meeting scheduled:", { ...meetingData, selectedDate, selectedTime });
-    toast({
-      title: "Meeting Scheduled!",
-      description: "We'll send you a confirmation email with the meeting details.",
-    });
-    
-    // Reset form
-    setMeetingData({ name: "", email: "", phone: "", purpose: "" });
-    setSelectedDate("");
-    setSelectedTime("");
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('meeting_schedules')
+        .insert([{
+          name: meetingData.name,
+          email: meetingData.email,
+          phone: meetingData.phone,
+          purpose: meetingData.purpose,
+          selected_date: selectedDate,
+          selected_time: selectedTime
+        }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Meeting Scheduled!",
+        description: "We'll send you a confirmation email with the meeting details.",
+      });
+      
+      // Reset form
+      setMeetingData({ name: "", email: "", phone: "", purpose: "" });
+      setSelectedDate("");
+      setSelectedTime("");
+    } catch (error) {
+      console.error('Error scheduling meeting:', error);
+      toast({
+        title: "Error",
+        description: "There was an error scheduling your meeting. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -169,9 +196,9 @@ const ScheduleMeeting = () => {
           <Button 
             type="submit" 
             className="w-full bg-primary-600 hover:bg-primary-700"
-            disabled={!selectedDate || !selectedTime || !meetingData.name || !meetingData.email}
+            disabled={!selectedDate || !selectedTime || !meetingData.name || !meetingData.email || isSubmitting}
           >
-            Schedule Meeting
+            {isSubmitting ? "Scheduling..." : "Schedule Meeting"}
           </Button>
         </form>
       </CardContent>
