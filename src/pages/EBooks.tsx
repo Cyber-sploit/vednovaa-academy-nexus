@@ -3,7 +3,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Download } from "lucide-react";
+import { BookOpen, Eye } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const EBooks = () => {
   const ebooks = [
@@ -12,48 +13,56 @@ const EBooks = () => {
       description: "Comprehensive guide to artificial intelligence and machine learning",
       pages: "450 pages",
       format: "PDF",
+      slug: "ai-ml-python"
     },
     {
       title: "Python Programming",
       description: "Complete Python programming handbook for beginners to advanced",
-      pages: "320 pages",
+      pages: "320 pages", 
       format: "PDF",
+      slug: "python-programming"
     },
     {
       title: "Data Analysis",
       description: "Data analysis techniques and tools for modern businesses",
       pages: "280 pages",
       format: "PDF",
+      slug: "data-analysis"
     },
     {
       title: "Cyber Security",
       description: "Essential cybersecurity practices and ethical hacking guide",
       pages: "380 pages",
       format: "PDF",
+      slug: "cyber-security"
     },
     {
       title: "Business Analysis",
       description: "Business analysis methodologies and best practices",
       pages: "240 pages",
       format: "PDF",
+      slug: "business-analysis"
     },
     {
       title: "Build360",
       description: "Full-stack development guide from frontend to backend",
       pages: "520 pages",
       format: "PDF",
+      slug: "build360"
     },
     {
       title: "Finance",
       description: "Financial modeling and investment analysis handbook",
       pages: "300 pages",
       format: "PDF",
+      slug: "finance"
     },
     {
       title: "Bioinformatics",
       description: "Computational biology and bioinformatics essentials",
       pages: "290 pages",
       format: "PDF",
+      slug: "bioinformatics"
     },
   ];
 
@@ -92,13 +101,12 @@ const EBooks = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <Button className="w-full bg-primary-600 hover:bg-primary-700">
-                    <Download className="h-4 w-4 mr-2" />
-                    Download
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Preview
-                  </Button>
+                  <Link to={`/ebook/${ebook.slug}`}>
+                    <Button className="w-full bg-primary-600 hover:bg-primary-700">
+                      <Eye className="h-4 w-4 mr-2" />
+                      Preview
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}

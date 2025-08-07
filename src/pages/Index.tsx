@@ -6,14 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Users, Award, Clock } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Index = () => {
   const navigate = useNavigate();
 
   const colleges = [
     "Dr. MGR University",
-    "LPU Punjab",
+    "LPU Punjab", 
     "Sharda University",
     "SRM Modinagar",
     "Galgotias University",
@@ -28,18 +28,21 @@ const Index = () => {
       description: "Master artificial intelligence and machine learning",
       enrollments: "1,200+ Enrolled",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600",
+      slug: "ai-ml-python"
     },
     {
-      title: "Data Analysis",
+      title: "Data Analysis", 
       description: "Transform data into actionable insights",
       enrollments: "800+ Enrolled",
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
+      slug: "data-analysis"
     },
     {
       title: "Cyber Security",
-      description: "Protect digital assets and networks",
+      description: "Protect digital assets and networks", 
       enrollments: "650+ Enrolled",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600",
+      slug: "cyber-security"
     },
   ];
 
@@ -50,13 +53,13 @@ const Index = () => {
       icon: <BookOpen className="h-6 w-6" />,
     },
     {
-      title: "Hands-on Experience",
+      title: "Hands-on Experience", 
       description: "Lab Access & Practice",
       icon: <Users className="h-6 w-6" />,
     },
     {
       title: "Project-Based Learning",
-      description: "Real-world Applications",
+      description: "Real-world Applications", 
       icon: <Award className="h-6 w-6" />,
     },
     {
@@ -77,6 +80,10 @@ const Index = () => {
 
   const handleExploreCourses = () => {
     navigate('/courses');
+  };
+
+  const handleViewCertificate = () => {
+    navigate('/sample-certificate');
   };
 
   return (
@@ -153,7 +160,27 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {popularCourses.map((course, index) => (
               <div key={index} className="animate-fade-in-scale" style={{ animationDelay: `${index * 0.2}s` }}>
-                <CourseCard {...course} />
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                  <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 overflow-hidden">
+                    <img 
+                      src={course.image} 
+                      alt={course.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{course.title}</h3>
+                    <p className="text-gray-600 mb-4">{course.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-primary-600 font-medium">{course.enrollments}</span>
+                      <Link to={`/course/${course.slug}`}>
+                        <Button size="sm" className="bg-primary-600 hover:bg-primary-700">
+                          Learn More
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -194,7 +221,11 @@ const Index = () => {
                 Upon successful course completion, students receive a <strong>Certificate of Completion</strong> and 
                 a <strong>Letter of Recommendation (LOR)</strong> to boost their career prospects.
               </p>
-              <Button size="lg" className="bg-white text-primary-600 hover:bg-primary-50 transform hover:scale-105 transition-all duration-300 shadow-lg">
+              <Button 
+                size="lg" 
+                className="bg-white text-primary-600 hover:bg-primary-50 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                onClick={handleViewCertificate}
+              >
                 View Sample Certificate
               </Button>
             </div>

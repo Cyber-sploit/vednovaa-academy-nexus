@@ -1,7 +1,5 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Monitor, Code, Settings, PlayCircle } from "lucide-react";
@@ -12,37 +10,37 @@ const Labs = () => {
       title: "AI/ML with Python",
       description: "Interactive machine learning experiments and model training",
       tools: ["Jupyter", "TensorFlow", "Scikit-learn"],
-      status: "Active",
+      status: "Coming Soon",
     },
     {
       title: "Python Programming",
       description: "Hands-on coding environment for Python development",
       tools: ["VS Code", "Python 3.9", "Git"],
-      status: "Active",
+      status: "Coming Soon",
     },
     {
       title: "Data Analysis",
       description: "Real-world datasets for analysis and visualization",
       tools: ["Pandas", "Matplotlib", "Tableau"],
-      status: "Active",
+      status: "Coming Soon",
     },
     {
       title: "Cyber Security",
       description: "Secure sandbox for ethical hacking and penetration testing",
       tools: ["Kali Linux", "Metasploit", "Wireshark"],
-      status: "Active",
+      status: "Coming Soon",
     },
     {
       title: "Build360",
       description: "Full-stack development environment with cloud deployment",
       tools: ["Docker", "AWS", "MongoDB"],
-      status: "Active",
+      status: "Coming Soon",
     },
     {
       title: "Finance",
       description: "Financial modeling and trading simulation environment",
       tools: ["Excel", "Bloomberg API", "Python"],
-      status: "Active",
+      status: "Coming Soon",
     },
   ];
 
@@ -122,7 +120,7 @@ const Labs = () => {
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <CardTitle className="text-lg font-semibold text-gray-900">{lab.title}</CardTitle>
-                    <Badge variant="default" className="bg-green-100 text-green-800">{lab.status}</Badge>
+                    <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">{lab.status}</Badge>
                   </div>
                   <CardDescription className="text-gray-600">{lab.description}</CardDescription>
                 </CardHeader>
@@ -137,9 +135,9 @@ const Labs = () => {
                       ))}
                     </div>
                   </div>
-                  <Button className="w-full bg-primary-600 hover:bg-primary-700">
-                    Access Lab
-                  </Button>
+                  <div className="w-full py-3 px-4 bg-gray-100 rounded-md text-center text-gray-600 font-medium">
+                    Coming Soon
+                  </div>
                 </CardContent>
               </Card>
             ))}
