@@ -114,8 +114,8 @@ const B2BCollaboration = () => {
                   <p className="text-gray-600 text-sm">{item.description}</p>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full">
-                    <ArrowRight className="h-6 w-6 text-primary-600 mx-auto" />
+                  <div className="hidden lg:block absolute top-8 -right-4 transform translate-x-1/2">
+                    <ArrowRight className="h-6 w-6 text-primary-600" />
                   </div>
                 )}
               </div>
