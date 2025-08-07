@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Mic } from "lucide-react";
+import { Clock, Mic, Brain, Code, BarChart3, Shield, Briefcase, Laptop } from "lucide-react";
 import { useState } from "react";
 
 const Podcast = () => {
@@ -17,7 +17,9 @@ const Podcast = () => {
       duration: "45 min",
       category: "Educational",
       date: "Dec 15, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400",
+      icon: Brain,
+      iconColor: "text-purple-600",
+      bgColor: "bg-purple-100"
     },
     {
       title: "From Student to Tech Leader",
@@ -25,7 +27,9 @@ const Podcast = () => {
       duration: "38 min",
       category: "Student Stories",
       date: "Dec 10, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400",
+      icon: Laptop,
+      iconColor: "text-indigo-600",
+      bgColor: "bg-indigo-100"
     },
     {
       title: "Overcoming Coding Challenges",
@@ -33,7 +37,9 @@ const Podcast = () => {
       duration: "32 min",
       category: "Motivational",
       date: "Dec 5, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400",
+      icon: Code,
+      iconColor: "text-green-600",
+      bgColor: "bg-green-100"
     },
     {
       title: "Industry Expert: Data Science Trends",
@@ -41,7 +47,9 @@ const Podcast = () => {
       duration: "52 min",
       category: "Guest Interview",
       date: "Nov 30, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
+      icon: BarChart3,
+      iconColor: "text-blue-600",
+      bgColor: "bg-blue-100"
     },
     {
       title: "Building Your First Startup",
@@ -49,7 +57,9 @@ const Podcast = () => {
       duration: "41 min",
       category: "Educational",
       date: "Nov 25, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400",
+      icon: Briefcase,
+      iconColor: "text-orange-600",
+      bgColor: "bg-orange-100"
     },
     {
       title: "Cybersecurity Career Paths",
@@ -57,7 +67,9 @@ const Podcast = () => {
       duration: "36 min",
       category: "Educational",
       date: "Nov 20, 2024",
-      thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400",
+      icon: Shield,
+      iconColor: "text-red-600",
+      bgColor: "bg-red-100"
     },
   ];
 
@@ -108,12 +120,8 @@ const Podcast = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredEpisodes.map((episode, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="relative aspect-video bg-gradient-to-br from-primary-100 to-primary-200 rounded-t-lg overflow-hidden">
-                  <img 
-                    src={episode.thumbnail} 
-                    alt={episode.title}
-                    className="w-full h-full object-cover"
-                  />
+                <div className={`relative aspect-video ${episode.bgColor} rounded-t-lg overflow-hidden flex items-center justify-center`}>
+                  <episode.icon className={`h-16 w-16 ${episode.iconColor}`} />
                   <div className="absolute top-4 right-4">
                     <Badge className="bg-black bg-opacity-70 text-white">
                       <Clock className="h-3 w-3 mr-1" />
