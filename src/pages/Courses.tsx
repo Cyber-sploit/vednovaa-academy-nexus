@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Brain, Code, BarChart3, Shield, Briefcase, Laptop, DollarSign, Dna } from "lucide-react";
+import { Brain, Code, BarChart3, Shield, Laptop } from "lucide-react";
 
 const Courses = () => {
   const courses = [
@@ -45,39 +45,12 @@ const Courses = () => {
       enrollments: "30 Enrolled"
     },
     {
-      title: "Business Analysis",
-      description: "Bridge the gap between business needs and technical solutions",
-      icon: Briefcase,
-      iconColor: "text-orange-600",
-      bgColor: "bg-orange-100",
-      slug: "business-analysis",
-      enrollments: "0 Enrolled"
-    },
-    {
       title: "Build360",
       description: "Comprehensive full-stack development program",
       icon: Laptop,
       iconColor: "text-indigo-600",
       bgColor: "bg-indigo-100",
       slug: "build360",
-      enrollments: "0 Enrolled"
-    },
-    {
-      title: "Finance",
-      description: "Financial modeling, analysis, and investment strategies",
-      icon: DollarSign,
-      iconColor: "text-emerald-600",
-      bgColor: "bg-emerald-100",
-      slug: "finance",
-      enrollments: "0 Enrolled"
-    },
-    {
-      title: "Bioinformatics",
-      description: "Apply computational techniques to biological data analysis",
-      icon: Dna,
-      iconColor: "text-pink-600",
-      bgColor: "bg-pink-100",
-      slug: "bioinformatics",
       enrollments: "0 Enrolled"
     },
   ];
