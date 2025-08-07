@@ -7,11 +7,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
 const Enrollment = () => {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const selectedCourse = searchParams.get('course');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -21,7 +24,7 @@ const Enrollment = () => {
     college: "",
     degree: "",
     year: "",
-    course: "",
+    course: selectedCourse || "",
     batchMonth: "",
     slot: "Evening",
     timing: ""
@@ -47,6 +50,13 @@ const Enrollment = () => {
     "5:00 PM – 6:15 PM",
     "6:30 PM – 7:45 PM"
   ];
+
+  // Update course in formData when selectedCourse changes
+  useEffect(() => {
+    if (selectedCourse) {
+      setFormData(prev => ({ ...prev, course: selectedCourse }));
+    }
+  }, [selectedCourse]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -85,7 +95,7 @@ const Enrollment = () => {
         college: "",
         degree: "",
         year: "",
-        course: "",
+        course: selectedCourse || "",
         batchMonth: "",
         slot: "Evening",
         timing: ""
@@ -115,6 +125,13 @@ const Enrollment = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Course Enrollment</h1>
+            {selectedCourse && (
+              <div className="mb-4">
+                <h2 className="text-2xl md:text-3xl font-semibold text-primary-100">
+                  {selectedCourse}
+                </h2>
+              </div>
+            )}
             <p className="text-xl text-primary-100 max-w-3xl mx-auto">
               Start your journey with us by filling out the enrollment form below
             </p>
@@ -242,16 +259,25 @@ const Enrollment = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="course">Course *</Label>
-                      <Select value={formData.course} onValueChange={(value) => handleInputChange('course', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select course" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {courses.map((course) => (
-                            <SelectItem key={course} value={course}>{course}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      {selectedCourse ? (
+                        <Input 
+                          id="course" 
+                          value={selectedCourse}
+                          readOnly
+                          className="bg-gray-100"
+                        />
+                      ) : (
+                        <Select value={formData.course} onValueChange={(value) => handleInputChange('course', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select course" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {courses.map((course) => (
+                              <SelectItem key={course} value={course}>{course}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
                     </div>
                     
                     <div className="space-y-2">

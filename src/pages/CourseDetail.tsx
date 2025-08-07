@@ -1,3 +1,4 @@
+
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -238,7 +239,11 @@ const CourseDetail = () => {
   const course = courseData[courseSlug as keyof typeof courseData];
 
   const handleEnrollNow = () => {
-    navigate('/enrollment');
+    if (course) {
+      navigate(`/enrollment?course=${encodeURIComponent(course.title)}`);
+    } else {
+      navigate('/enrollment');
+    }
   };
 
   if (!course) {
