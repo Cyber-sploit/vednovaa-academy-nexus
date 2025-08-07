@@ -1,3 +1,4 @@
+
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, Clock, BookOpen, Brain, Code, BarChart3, Shield, Briefcase, Laptop, DollarSign, Dna, Users, Target, Lightbulb } from "lucide-react";
-import { useState } from "react";
+import { useEffect } from "react";
 
 const CourseDetail = () => {
   const { courseSlug } = useParams();
@@ -14,7 +15,7 @@ const CourseDetail = () => {
 
   const personalityDevelopmentCurriculum = [
     "Effective Communication (Verbal and Written)",
-    "Positive Body Language and Posture",
+    "Positive Body Language and Posture", 
     "Time Management Strategies",
     "Team Collaboration and Interpersonal Skills",
     "Conflict Resolution Basics",
@@ -235,6 +236,12 @@ const CourseDetail = () => {
     }
   };
 
+  // Log for debugging
+  useEffect(() => {
+    console.log("CourseDetail component mounted with courseSlug:", courseSlug);
+    console.log("Available courses:", Object.keys(courseData));
+  }, [courseSlug]);
+
   const course = courseData[courseSlug as keyof typeof courseData];
 
   const handleEnrollNow = () => {
@@ -242,11 +249,13 @@ const CourseDetail = () => {
   };
 
   if (!course) {
+    console.error("Course not found:", courseSlug);
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Course Not Found</h1>
+          <p className="text-gray-600 mb-8">The course you're looking for doesn't exist or has been moved.</p>
           <Link to="/courses">
             <Button>Back to Courses</Button>
           </Link>
