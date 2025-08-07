@@ -11,36 +11,36 @@ const Index = () => {
   const navigate = useNavigate();
 
   const colleges = [
-    "Dr. MGR University",
-    "LPU Punjab", 
-    "Sharda University",
-    "SRM Modinagar",
-    "Galgotias University",
-    "KIIT University",
-    "Amity University",
-    "Chandigarh University",
+    "Government Engineering College",
+    "State University of Technology",
+    "Regional Institute of Management",
+    "National College of Engineering",
+    "Central Technical University",
+    "Institute of Applied Sciences",
+    "Metropolitan College of Arts",
+    "Provincial University",
   ];
 
   const popularCourses = [
     {
       title: "AI/ML with Python",
       description: "Master artificial intelligence and machine learning",
-      enrollments: "1,200+ Enrolled",
-      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600",
+      enrollments: "0 Enrolled",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600",
       slug: "ai-ml-python"
     },
     {
       title: "Data Analysis", 
       description: "Transform data into actionable insights",
-      enrollments: "800+ Enrolled",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
+      enrollments: "0 Enrolled",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
       slug: "data-analysis"
     },
     {
       title: "Cyber Security",
       description: "Protect digital assets and networks", 
-      enrollments: "650+ Enrolled",
-      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600",
+      enrollments: "0 Enrolled",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600",
       slug: "cyber-security"
     },
   ];
@@ -98,31 +98,41 @@ const Index = () => {
           <div className="absolute top-40 right-40 w-16 h-16 bg-white opacity-10 rounded-full animate-float-slow"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <div className="text-center animate-fade-in-up">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight animate-slide-down">
-              Shape Your Future with
-              <span className="block text-primary-200 animate-glow">Next-Gen Education</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-primary-100 max-w-3xl mx-auto animate-fade-in-up animation-delay-300">
-              Join thousands of students mastering cutting-edge skills in AI, Data Science, 
-              Cybersecurity, and more at India's premier educational academy.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-600">
-              <Button 
-                size="lg" 
-                className="bg-white text-primary-600 hover:bg-primary-50 text-lg px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                onClick={handleEnquireNow}
-              >
-                Enquire Now
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 bg-transparent text-lg px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-                onClick={handleExploreCourses}
-              >
-                Explore Courses
-              </Button>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left animate-fade-in-up">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight animate-slide-down">
+                Shape Your Future with
+                <span className="block text-primary-200 animate-glow">Next-Gen Education</span>
+              </h1>
+              <p className="text-xl md:text-2xl mb-8 text-primary-100 max-w-3xl animate-fade-in-up animation-delay-300">
+                Join thousands of students mastering cutting-edge skills in AI, Data Science, 
+                Cybersecurity, and more at India's premier educational academy.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up animation-delay-600">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-primary-600 hover:bg-primary-50 text-lg px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  onClick={handleEnquireNow}
+                >
+                  Enquire Now
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-2 border-white text-white hover:bg-white hover:text-primary-600 bg-transparent text-lg px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  onClick={handleExploreCourses}
+                >
+                  Explore Courses
+                </Button>
+              </div>
+            </div>
+            
+            <div className="animate-fade-in-scale" style={{ animationDelay: '0.3s' }}>
+              <img 
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800" 
+                alt="Students learning together"
+                className="rounded-lg shadow-2xl w-full h-80 object-cover"
+              />
             </div>
           </div>
         </div>

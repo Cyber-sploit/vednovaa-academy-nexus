@@ -1,20 +1,16 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScheduleMeeting from "@/components/ScheduleMeeting";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Calendar, Download, Users } from "lucide-react";
+import { MapPin, Phone, Mail, Download, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Contact = () => {
-  const handleScheduleMeeting = () => {
-    // This would open Google Calendar integration
-    window.open('https://calendar.google.com/calendar/appointments/AcZssZ0', '_blank');
-  };
-
   const handleDownloadBrochure = () => {
     window.open('https://drive.google.com/file/d/1_ed-ovWhmM6oLXzrPEY9I1lZslgnHFn2/view?usp=sharing', '_blank');
   };
@@ -154,14 +150,6 @@ const Contact = () => {
                   <Button 
                     variant="outline" 
                     className="w-full justify-start"
-                    onClick={handleScheduleMeeting}
-                  >
-                    <Calendar className="h-4 w-4 mr-2" />
-                    Schedule a Meeting
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full justify-start"
                     onClick={handleDownloadBrochure}
                   >
                     <Download className="h-4 w-4 mr-2" />
@@ -176,6 +164,11 @@ const Contact = () => {
                 </CardContent>
               </Card>
             </div>
+          </div>
+
+          {/* Schedule Meeting Section */}
+          <div className="mt-16">
+            <ScheduleMeeting />
           </div>
         </div>
       </section>
