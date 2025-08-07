@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -8,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Enrollment = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     gender: "",
@@ -83,13 +84,58 @@ const Enrollment = () => {
     "6:30 PM – 7:45 PM"
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Enrollment form submitted:", formData);
-    toast({
-      title: "Enrollment Submitted!",
-      description: "We'll contact you within 24 hours to confirm your enrollment.",
-    });
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('enrollment_submissions')
+        .insert([{
+          name: formData.name,
+          gender: formData.gender,
+          email: formData.email,
+          phone: formData.phone,
+          college: formData.college,
+          degree: formData.degree,
+          year: formData.year,
+          course: formData.course,
+          batch_month: formData.batchMonth,
+          slot: formData.slot,
+          timing: formData.timing
+        }]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Enrollment Submitted!",
+        description: "We'll contact you within 24 hours to confirm your enrollment.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        gender: "",
+        email: "",
+        phone: "",
+        college: "",
+        degree: "",
+        year: "",
+        course: "",
+        batchMonth: "",
+        slot: "Evening",
+        timing: ""
+      });
+    } catch (error) {
+      console.error('Error submitting enrollment:', error);
+      toast({
+        title: "Error",
+        description: "There was an error submitting your enrollment. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -295,8 +341,9 @@ const Enrollment = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-primary-600 hover:bg-primary-700 text-lg py-3"
+                  disabled={isSubmitting}
                 >
-                  Submit Enrollment
+                  {isSubmitting ? "Submitting..." : "Submit Enrollment"}
                 </Button>
               </form>
             </CardContent>
