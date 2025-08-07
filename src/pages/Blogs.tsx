@@ -4,13 +4,9 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, User, FileText, Brain, Code, BarChart3, Shield, Briefcase, Laptop } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Calendar, User, FileText } from "lucide-react";
 
 const Blogs = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
   const blogPosts = [
     {
       title: "10 Essential Skills Every Data Scientist Needs in 2024",
@@ -19,22 +15,16 @@ const Blogs = () => {
       date: "December 15, 2024",
       category: "Career Advice",
       readTime: "8 min read",
-      slug: "data-scientist-skills-2024",
-      icon: BarChart3,
-      iconColor: "text-blue-600",
-      bgColor: "bg-blue-100"
+      thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
     },
     {
       title: "The Rise of AI in Indian Education: Opportunities and Challenges",
       summary: "An in-depth analysis of how artificial intelligence is reshaping the educational landscape in India",
       author: "Prof. Rajesh Kumar",
-      date: "December 12, 2024", 
+      date: "December 12, 2024",
       category: "Industry Trends",
       readTime: "12 min read",
-      slug: "ai-indian-education",
-      icon: Brain,
-      iconColor: "text-purple-600",
-      bgColor: "bg-purple-100"
+      thumbnail: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600",
     },
     {
       title: "From Zero to Hero: A Student's Journey in Cybersecurity",
@@ -43,10 +33,7 @@ const Blogs = () => {
       date: "December 10, 2024",
       category: "Student Success",
       readTime: "6 min read",
-      slug: "student-cybersecurity-journey",
-      icon: Shield,
-      iconColor: "text-red-600",
-      bgColor: "bg-red-100"
+      thumbnail: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600",
     },
     {
       title: "Python vs R: Which Language Should You Choose for Data Analysis?",
@@ -55,10 +42,7 @@ const Blogs = () => {
       date: "December 8, 2024",
       category: "Course Insights",
       readTime: "10 min read",
-      slug: "python-vs-r-comparison",
-      icon: Code,
-      iconColor: "text-green-600",
-      bgColor: "bg-green-100"
+      thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600",
     },
     {
       title: "Building Your First Machine Learning Model: A Step-by-Step Guide",
@@ -67,10 +51,7 @@ const Blogs = () => {
       date: "December 5, 2024",
       category: "Educational Resources",
       readTime: "15 min read",
-      slug: "first-ml-model-guide",
-      icon: Brain,
-      iconColor: "text-purple-600",
-      bgColor: "bg-purple-100"
+      thumbnail: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600",
     },
     {
       title: "The Future of Work: How Technology is Reshaping Careers",
@@ -79,18 +60,11 @@ const Blogs = () => {
       date: "December 3, 2024",
       category: "Industry Trends",
       readTime: "9 min read",
-      slug: "future-of-work-technology",
-      icon: Laptop,
-      iconColor: "text-indigo-600",
-      bgColor: "bg-indigo-100"
+      thumbnail: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=600",
     },
   ];
 
   const categories = ["All", "Career Advice", "Industry Trends", "Course Insights", "Educational Resources", "Student Success"];
-
-  const filteredPosts = selectedCategory === "All" 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-white">
@@ -116,9 +90,8 @@ const Blogs = () => {
             {categories.map((category, index) => (
               <Button
                 key={index}
-                variant={selectedCategory === category ? "default" : "outline"}
-                className={selectedCategory === category ? "bg-primary-600 hover:bg-primary-700" : ""}
-                onClick={() => setSelectedCategory(category)}
+                variant={index === 0 ? "default" : "outline"}
+                className={index === 0 ? "bg-primary-600 hover:bg-primary-700" : ""}
               >
                 {category}
               </Button>
@@ -131,10 +104,14 @@ const Blogs = () => {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post, index) => (
+            {blogPosts.map((post, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300 cursor-pointer animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className={`aspect-video ${post.bgColor} rounded-t-lg overflow-hidden flex items-center justify-center`}>
-                  <post.icon className={`h-16 w-16 ${post.iconColor}`} />
+                <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-200 rounded-t-lg overflow-hidden">
+                  <img 
+                    src={post.thumbnail} 
+                    alt={post.title}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <CardHeader>
                   <div className="flex justify-between items-start mb-2">
@@ -157,11 +134,9 @@ const Blogs = () => {
                       <span>{post.date}</span>
                     </div>
                   </div>
-                  <Link to={`/blog/${post.slug}`}>
-                    <Button className="w-full bg-primary-600 hover:bg-primary-700">
-                      Read More
-                    </Button>
-                  </Link>
+                  <Button className="w-full bg-primary-600 hover:bg-primary-700">
+                    Read More
+                  </Button>
                 </CardContent>
               </Card>
             ))}
