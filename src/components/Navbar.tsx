@@ -14,7 +14,7 @@ const Navbar = () => {
     { name: "Courses", path: "/courses" },
     { name: "e-Books", path: "/ebooks" },
     { name: "Labs", path: "/labs" },
-    { name: "Podcast", path: "/podcast" },
+    { name: "B2B Collaboration", path: "/b2b-collaboration" },
     { name: "Blogs", path: "/blogs" },
     { name: "Contact", path: "/contact" },
   ];
