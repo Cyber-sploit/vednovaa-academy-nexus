@@ -35,7 +35,7 @@ const Navbar = () => {
             <img 
               src="/lovable-uploads/3ff1ae8d-5072-4650-bc16-23977d26f4c5.png" 
               alt="Vednovaa Academy" 
-              className="h-14 w-auto"
+              className="h-16 w-auto"
             />
           </Link>
 
