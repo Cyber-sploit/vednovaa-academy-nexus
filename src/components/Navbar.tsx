@@ -1,12 +1,13 @@
 
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -19,6 +20,11 @@ const Navbar = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const handleEnquireNow = () => {
+    navigate('/contact');
+    setIsOpen(false);
+  };
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
@@ -46,7 +52,10 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <Button className="bg-primary-600 hover:bg-primary-700">
+            <Button 
+              className="bg-primary-600 hover:bg-primary-700"
+              onClick={handleEnquireNow}
+            >
               Enquire Now
             </Button>
           </div>
@@ -82,7 +91,10 @@ const Navbar = () => {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button className="w-full bg-primary-600 hover:bg-primary-700">
+                <Button 
+                  className="w-full bg-primary-600 hover:bg-primary-700"
+                  onClick={handleEnquireNow}
+                >
                   Enquire Now
                 </Button>
               </div>
