@@ -4,10 +4,15 @@ import CourseCard from "@/components/CourseCard";
 import InteractiveCard from "@/components/InteractiveCard";
 import SectionDivider from "@/components/SectionDivider";
 import GradientText from "@/components/GradientText";
+import StatsCounter from "@/components/StatsCounter";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
+import SuccessStories from "@/components/SuccessStories";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import FAQ from "@/components/FAQ";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, Award, Clock, GraduationCap, Target, Lightbulb, Brain, Code, Shield, BarChart3, TrendingUp, Star, Database, FlaskConical, DollarSign, Dna, ChevronRight, Play, Sparkles } from "lucide-react";
+import { BookOpen, Users, Award, Clock, GraduationCap, Target, Lightbulb, Brain, Code, Shield, BarChart3, TrendingUp, Star, Database, FlaskConical, DollarSign, Dna, ChevronRight, Play, Sparkles, Quote, Zap, Globe, Rocket, HeartHandshake } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -138,12 +143,14 @@ const Index = () => {
               {/* Stats Bar */}
               <div className="flex flex-wrap gap-6 mb-8 animate-fade-in-up animation-delay-600">
                 {[
-                  { value: "5000+", label: "Students Trained" },
-                  { value: "95%", label: "Placement Rate" },
-                  { value: "50+", label: "Industry Partners" },
+                  { value: 5000, suffix: "+", label: "Students Trained" },
+                  { value: 95, suffix: "%", label: "Placement Rate" },
+                  { value: 50, suffix: "+", label: "Industry Partners" },
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-2xl font-bold text-white">{stat.value}</div>
+                    <div className="text-2xl font-bold text-white">
+                      <StatsCounter end={stat.value} suffix={stat.suffix} />
+                    </div>
                     <div className="text-sm text-white/80">{stat.label}</div>
                   </div>
                 ))}
@@ -419,6 +426,145 @@ const Index = () => {
                   <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <WhyChooseUs />
+
+      {/* Success Stories */}
+      <SuccessStories />
+
+      {/* Industry Insights Section */}
+      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <Badge className="bg-accent/10 text-accent border-accent/20 px-4 py-2 mb-6">
+              <Globe className="h-4 w-4 mr-2" />
+              Industry Insights
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
+              Stay Ahead with <GradientText>Industry Trends</GradientText>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Get insights into the latest tech trends and career opportunities
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "AI/ML Job Market Growth",
+                stat: "40% YoY",
+                description: "AI/ML roles are growing 40% year-over-year in India",
+                icon: TrendingUp,
+                color: "text-green-600",
+                bgColor: "bg-green-100"
+              },
+              {
+                title: "Cybersecurity Demand",
+                stat: "3.5M Jobs",
+                description: "Global cybersecurity workforce shortage of 3.5 million",
+                icon: Shield,
+                color: "text-red-600",
+                bgColor: "bg-red-100"
+              },
+              {
+                title: "Data Science Salaries",
+                stat: "₹8-25L",
+                description: "Average data scientist salary ranges from ₹8-25 LPA",
+                icon: BarChart3,
+                color: "text-blue-600",
+                bgColor: "bg-blue-100"
+              }
+            ].map((insight, index) => (
+              <InteractiveCard 
+                key={index}
+                className="text-center group"
+                hoverLift={true}
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                <div className={`w-16 h-16 ${insight.bgColor} rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <insight.icon className={`h-8 w-8 ${insight.color}`} />
+                </div>
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-foreground">{insight.title}</h3>
+                  <div className="text-3xl font-bold text-primary">{insight.stat}</div>
+                  <p className="text-sm text-muted-foreground">{insight.description}</p>
+                </div>
+              </InteractiveCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 bg-muted/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 animate-fade-in-up">
+            <Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-2 mb-6">
+              <Quote className="h-4 w-4 mr-2" />
+              Student Testimonials
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-4">
+              What Our <GradientText>Students Say</GradientText>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Real feedback from students who transformed their careers with us
+            </p>
+          </div>
+          
+          <TestimonialCarousel />
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <FAQ />
+
+      {/* Final CTA Section */}
+      <section className="py-20 bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-black/5 to-black/10"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iNyIgY3k9IjciIHI9IjEiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
+        
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="space-y-8 animate-fade-in-up">
+            <div className="space-y-4">
+              <Rocket className="h-16 w-16 mx-auto text-yellow-300" />
+              <h2 className="text-3xl md:text-5xl font-serif font-bold">
+                Ready to Transform Your Career?
+              </h2>
+              <p className="text-xl text-white/90 max-w-2xl mx-auto">
+                Join thousands of successful professionals who started their journey with Vednovaa Academy. 
+                Your dream career in tech is just one click away.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-4 transform hover:scale-105 transition-all duration-300 shadow-elegant hover:shadow-glow group"
+                onClick={handleEnquireNow}
+              >
+                <HeartHandshake className="mr-2 h-5 w-5" />
+                Start Your Journey Today
+                <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-2 border-white text-white hover:bg-white hover:text-primary bg-transparent/10 backdrop-blur-sm text-lg px-8 py-4 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                onClick={handleExploreCourses}
+              >
+                Explore All Courses
+              </Button>
+            </div>
+
+            <div className="pt-8 text-center">
+              <p className="text-white/80 text-sm">
+                🚀 Join the tech revolution • 💼 Guaranteed placement support • 🎓 Industry-recognized certificates
+              </p>
             </div>
           </div>
         </div>
